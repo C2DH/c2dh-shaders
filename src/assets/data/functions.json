@@ -1,0 +1,108 @@
+{
+  "functions": {
+    "useful": [
+      {
+        "name": "sin",
+        "link": "https://thebookofshaders.com/glossary/?search=sin",
+        "description": "Calculates the sine of an angle."
+      },
+      {
+        "name": "cos",
+        "link": "https://thebookofshaders.com/glossary/?search=cos",
+        "description": "Calculates the cosine of an angle."
+      },
+      {
+        "name": "tan",
+        "link": "https://thebookofshaders.com/glossary/?search=tan",
+        "description": "Calculates the tangent of an angle."
+      },
+      {
+        "name": "asin",
+        "link": "https://thebookofshaders.com/glossary/?search=asin",
+        "description": "Calculates the arcsine of a value."
+      },
+      {
+        "name": "acos",
+        "link": "https://thebookofshaders.com/glossary/?search=acos",
+        "description": "Calculates the arccosine of a value."
+      },
+      {
+        "name": "atan",
+        "link": "https://thebookofshaders.com/glossary/?search=atan",
+        "description": "Calculates the arctangent of a value."
+      },
+      {
+        "name": "pow",
+        "link": "https://thebookofshaders.com/glossary/?search=pow",
+        "description": "Raises a number to the power of another number."
+      },
+      {
+        "name": "exp",
+        "link": "https://thebookofshaders.com/glossary/?search=exp",
+        "description": "Calculates the exponential of a number."
+      },
+      {
+        "name": "log",
+        "link": "https://thebookofshaders.com/glossary/?search=log",
+        "description": "Calculates the natural logarithm of a number."
+      },
+      {
+        "name": "sqrt",
+        "link": "https://thebookofshaders.com/glossary/?search=sqrt",
+        "description": "Calculates the square root of a number."
+      },
+      {
+        "name": "abs",
+        "link": "https://thebookofshaders.com/glossary/?search=abs",
+        "description": "Calculates the absolute value of a number."
+      },
+      {
+        "name": "sign",
+        "link": "https://thebookofshaders.com/glossary/?search=sign",
+        "description": "Determines the sign of a number."
+      },
+      {
+        "name": "floor",
+        "link": "https://thebookofshaders.com/glossary/?search=floor",
+        "description": "Rounds a number down to the nearest integer."
+      },
+      {
+        "name": "ceil",
+        "link": "https://thebookofshaders.com/glossary/?search=ceil",
+        "description": "Rounds a number up to the nearest integer."
+      },
+      {
+        "name": "fract",
+        "link": "https://thebookofshaders.com/glossary/?search=fract",
+        "description": "Calculates the fractional part of a number."
+      },
+      {
+        "name": "mod",
+        "link": "https://thebookofshaders.com/glossary/?search=mod",
+        "description": "Calculates the modulus of two numbers."
+      },
+      {
+        "name": "min",
+        "link": "https://thebookofshaders.com/glossary/?search=min",
+        "description": "Finds the minimum of two numbers."
+      },
+      {
+        "name": "max",
+        "link": "https://thebookofshaders.com/glossary/?search=max",
+        "description": "Finds the maximum of two numbers."
+      },
+      {
+        "name": "clamp",
+        "link": "https://thebookofshaders.com/glossary/?search=clamp",
+        "description": "Clamps a number between two values."
+      }
+    ],
+    "noises": [
+      {
+        "name": "Perlin Noises",
+        "link": "https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83",
+        "description": "A coherent noise function which is widely used in computer graphics."
+      }
+    ]
+  }
+}

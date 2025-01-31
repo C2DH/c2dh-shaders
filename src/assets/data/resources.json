@@ -1,0 +1,70 @@
+{
+  "resources": {
+    "websites": [
+      {
+        "name": "Shaderific documentation",
+        "link": "https://shaderific.com/glsl.html",
+        "description": "A comprehensive guide to GLSL."
+      },
+      {
+        "name": "SKronos Group OpenGL reference pages",
+        "link": "https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/indexflat.php",
+        "description": "Official OpenGL reference pages."
+      },
+      {
+        "name": "😍😍😍 Book of shaders documentation",
+        "link": "https://thebookofshaders.com/",
+        "description": "A gentle introduction to GLSL."
+      },
+      {
+        "name": "Shader Toy",
+        "link": "https://www.shadertoy.com/",
+        "description": "A platform to share and learn shaders."
+      },
+      {
+        "name": "GM Shaders / Tips and Tricks",
+        "link": " https://gmshaders.com/tutorials/tips_and_tricks/",
+        "description": "A collection of tips and tricks for shader development."
+      },
+      {
+        "name": "The Ultimate Shader Editor.",
+        "link": "https://nodetoy.co/",
+        "description": "A shader editor with a node-based interface."
+      }
+    ],
+    "graphs": [
+      {
+        "name": "GLSL Grapher",
+        "link": "https://fordhurley.com/glsl-grapher/",
+        "description": "A tool to visualize GLSL code."
+      },
+      {
+        "name": "Bruno's Graph Calculator",
+        "link": "https://www.desmos.com/calculator",
+        "description": "A graphing calculator."
+      }
+    ],
+    "noises": [
+      {
+        "name": "Perlin Noise Maker",
+        "link": "http://kitfox.com/projects/perlinNoiseMaker/",
+        "description": "A tool to generate Perlin noise textures."
+      },
+      {
+        "name": "Noise Texture Pack",
+        "link": "https://opengameart.org/content/noise-texture-pack",
+        "description": "A collection of noise textures."
+      },
+      {
+        "name": "EffectTextureMaker",
+        "link": "https://mebiusbox.github.io/contents/EffectTextureMaker/",
+        "description": "A tool to generate various textures."
+      },
+      {
+        "name": "Figma Plugin: Noise Generator",
+        "link": "https://www.figma.com/community/plugin/1138854718618193875/noise-texture",
+        "description": "A Figma plugin to generate noise textures."
+      }
+    ]
+  }
+}

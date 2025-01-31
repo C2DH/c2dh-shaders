@@ -1,0 +1,44 @@
+.Documentation {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-modal);
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  color: var(--white);
+  background-color: var(--dark);
+}
+
+.Documentation h1 {
+  font-size: 2rem;
+}
+
+.Documentation h2 {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.Documentation h3 {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.Documentation a {
+  color: var(--active);
+}
+
+.Documentation .Functions a {
+  letter-spacing: 2px;
+}
+.Documentation .Functions li {
+  margin: 0 0.3rem;
+}
+
+.Documentation p {
+  padding: 0.8rem 0;
+  opacity: 0.6;
+}

@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "./pages/page.css";
+
+:root {
+  --dark: #1b1a1d;
+  --white: #d6d2cf;
+  --accent: #5b6786;
+  --active: #fd5982;
+  --bg: #afafaf;
+  --dark-rgb: 27, 26, 29;
+  --white-rgb: 214, 210, 207;
+  --accent-rgb: 91, 103, 134;
+  --bg-rgb: 203, 144, 165;
+
+  /* z-index */
+  --z-canvas: 0;
+  --z-default: 1;
+  --z-fullscreen-menu: 2;
+  --z-header: 3;
+  --z-modal: 5;
+  --z-info: 6;
+}
+
+@font-face {
+  font-family: "ClashDisplay-Variable";
+  src: url("./fonts/ClashDisplay-Variable.woff2") format("woff2"),
+    url("./fonts/ClashDisplay-Variable.woff") format("woff"),
+    url("./fonts/ClashDisplay-Variable.ttf") format("truetype");
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+html,
+body,
+#root {
+  font-family: "ClashDisplay-Variable", sans-serif;
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--dark);
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.experiment {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.experiment > h1 {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+}
+.code {
+  overflow-y: auto;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 50%;
+  padding: 2rem;
+  z-index: var(--z-canvas);
+}
+
+pre,
+code {
+  display: block;
+  width: 100%;
+  white-space: pre-wrap;
+}
+
+.canvas {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100vh;
+}
+
+Canvas {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: var(--z-canvas);
+}
+
+.App.coodeMenuIsActive .code {
+  transform: translateX(-100%);
+  padding: 0;
+}
+
+.App.documentationIsActive .Documentation {
+  transform: translateX(-100%);
+}
+
+.App.coodeMenuIsActive .canvas,
+.App.coodeMenuIsActive canvas {
+  width: 100vw !important;
+}
+
+button.show-code.inactive {
+  background-color: rgba(var(--accent-rgb), 0.5);
+}
+
+.leva-c-kWgxhW-bCBHqk-fill-false {
+  z-index: 1 !important;
+}

@@ -45,7 +45,7 @@ function CanvasViz() {
       uStripes: new THREE.Uniform(stripesControl.uStripes),
     };
 
-    useFrame((state, dt) => {
+    useFrame((_, dt) => {
       uniforms.uTime.value += dt;
     });
 

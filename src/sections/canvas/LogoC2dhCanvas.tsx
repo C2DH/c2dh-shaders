@@ -58,7 +58,7 @@ const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
     uColor: "#70c1ff", // Default color
   });
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (logoMaterial.current) {
       logoMaterial.current.uTime += delta;
       logoMaterial.current.uColor = new THREE.Color(uColor);
@@ -96,7 +96,7 @@ const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
     uColor: "#70c1ff", // Default color
   });
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (textMaterial.current) {
       textMaterial.current.uTime += delta;
       textMaterial.current.uColor = new THREE.Color(uColor);

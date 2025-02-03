@@ -8,5 +8,5 @@
     "types": ["vite-plugin-glsl/ext"],
     "typeRoots": ["./node_modules/@types/", "./types", "./node_modules"]
   },
-  "include": ["src/**/*", "types/**/*"]
+  "include": ["vite.config.ts", "src/**/*", "types/**/*", "scripts", "plugins"]
 }

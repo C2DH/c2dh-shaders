@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls } from "@react-three/drei";
-import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import fragmentShader from "../../shaders/introduction/fragment.glsl?raw";
@@ -10,7 +9,7 @@ import CustomShaderMaterial from "three-custom-shader-material";
 import { useControls } from "leva";
 
 function CanvasViz() {
-  const OceanPillar = (props) => {
+  const OceanPillar = (props: JSX.IntrinsicElements["group"]) => {
     const { nodes, materials } = useGLTF("./ocean_pillar.glb");
     console.log("Gltf", nodes);
 
@@ -24,8 +23,8 @@ function CanvasViz() {
     });
 
     console.log(nodes);
-    materials.ocean.roughness = 0.1;
-    materials.ocean.metalness = 0.9;
+    (materials.ocean as THREE.MeshStandardMaterial).roughness = 0.1;
+    (materials.ocean as THREE.MeshStandardMaterial).metalness = 0.9;
 
     const baseMaterialCustom = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color(0x000000),
@@ -68,7 +67,7 @@ function CanvasViz() {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.ocean.geometry}
+          geometry={(nodes.ocean as THREE.Mesh).geometry}
           scale={3}
           position={[0, 0, 0]}
         >
@@ -77,7 +76,7 @@ function CanvasViz() {
         <mesh
           castShadow
           receiveShadow
-          geometry={nodes.pillar.geometry}
+          geometry={(nodes.pillar as THREE.Mesh).geometry}
           material={materials.pillar}
         />
       </group>

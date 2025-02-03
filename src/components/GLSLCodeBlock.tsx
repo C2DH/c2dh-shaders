@@ -36,11 +36,9 @@ const GLSLCodeBlock = ({
                 <h3 className="mb-2">{glslTitle ? glslTitle : null}</h3>
               )}
 
-              <SyntaxHighlighter
-                language="glsl"
-                style={dracula}
-                code={glslCode}
-              />
+              <SyntaxHighlighter language="glsl" style={dracula}>
+                {glslCode}
+              </SyntaxHighlighter>
             </div>
           ) : null}
         </>
@@ -53,11 +51,9 @@ const GLSLCodeBlock = ({
               {showTitile ? null : (
                 <h3 className="mb-2">{tsTitle ? tsTitle : null}</h3>
               )}
-              <SyntaxHighlighter
-                language="typescript"
-                style={dracula}
-                code={typeScriptCode}
-              />
+              <SyntaxHighlighter language="typescript" style={dracula}>
+                {typeScriptCode}
+              </SyntaxHighlighter>
             </div>
           ) : null}
         </>

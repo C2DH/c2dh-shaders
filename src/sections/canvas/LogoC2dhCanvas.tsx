@@ -1,36 +1,57 @@
 import * as THREE from "three";
-import { Canvas, extend, useFrame } from "@react-three/fiber";
+import { Canvas, extend, useFrame, ReactThreeFiber } from "@react-three/fiber";
 import {
   OrbitControls,
   shaderMaterial,
   PerspectiveCamera,
 } from "@react-three/drei";
 import { useRef, FC } from "react";
+
+// Extend ShaderMaterial to include custom properties
+declare module "three" {
+  interface ShaderMaterial {
+    uTime: number;
+    uColor: THREE.Color;
+  }
+}
 import { useGLTF } from "@react-three/drei";
 import { useControls } from "leva";
 import fragmentShaderLogo from "../../shaders/logo_c2dh/fragment.glsl?raw";
-import vertexShaderLogo from "../../shaders/logo_c2dh/vertex.glsl";
+import vertexShaderLogo from "../../shaders/logo_c2dh/vertex.glsl?raw";
+import random2D from "../../shaders/logo_c2dh/includes/random2D.glsl?raw"; // Import random2D shader
+
+// Extend JSX IntrinsicElements to include logoMaterial
+declare module "@react-three/fiber" {
+  interface ThreeElements {
+    logoMaterial: ReactThreeFiber.Object3DNode<
+      THREE.ShaderMaterial,
+      typeof THREE.ShaderMaterial
+    >;
+  }
+}
 
 // Define the shader material
 const LogoMaterial = shaderMaterial(
-  { uTime: 0, uColor: new THREE.Color("#70c1ff") },
-  vertexShaderLogo,
-  fragmentShaderLogo,
-  (material) => {
-    if (material) {
-      material.transparent = true;
-      material.side = THREE.DoubleSide;
-      material.depthWrite = false;
-      material.blending = THREE.AdditiveBlending;
-    }
-  }
+  {
+    uTime: 0,
+    uColor: new THREE.Color("#70c1ff"),
+    transparent: true,
+    side: THREE.DoubleSide,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  },
+  `
+    ${random2D}
+    ${vertexShaderLogo}
+  `,
+  fragmentShaderLogo
 );
 
 extend({ LogoMaterial });
 
 // LogoC2dh Component
 const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
-  const logoMaterial = useRef();
+  const logoMaterial = useRef<THREE.ShaderMaterial>(null);
   const { nodes } = useGLTF("./c2dh_logo.glb");
 
   const { uColor } = useControls({
@@ -46,7 +67,11 @@ const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
 
   return (
     <group scale={2.5} {...props} dispose={null}>
-      <mesh castShadow receiveShadow geometry={nodes.logo.geometry}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={(nodes.logo as THREE.Mesh).geometry}
+      >
         <logoMaterial ref={logoMaterial} />
       </mesh>
     </group>
@@ -59,14 +84,11 @@ useGLTF.preload("./c2dh_logo.glb");
 const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
   props
 ) => {
-  const { nodes, materials } = useGLTF<{
-    nodes: { Cube: THREE.Mesh; text: THREE.Mesh };
-    materials: { White: THREE.Material };
-  }>("/cubeAnnualReport.glb");
-  const logoMaterial = useRef();
-  const cubeMaterial = useRef();
+  const { nodes, materials } = useGLTF("/cubeAnnualReport.glb");
+  const textMaterial = useRef<THREE.ShaderMaterial>(null);
+  const cubeMaterial = useRef<THREE.ShaderMaterial>(null);
 
-  materials.White.roughness = 1;
+  (materials.White as THREE.MeshStandardMaterial).roughness = 1;
   materials.White.transparent = true;
   materials.White.opacity = 0.8;
 
@@ -75,9 +97,11 @@ const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
   });
 
   useFrame((state, delta) => {
-    if (logoMaterial.current) {
-      logoMaterial.current.uTime += delta;
-      logoMaterial.current.uColor = new THREE.Color(uColor);
+    if (textMaterial.current) {
+      textMaterial.current.uTime += delta;
+      textMaterial.current.uColor = new THREE.Color(uColor);
+    }
+    if (cubeMaterial.current) {
       cubeMaterial.current.uTime += delta;
       cubeMaterial.current.uColor = new THREE.Color(uColor);
     }
@@ -89,7 +113,7 @@ const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
         <logoMaterial ref={cubeMaterial} />
       </mesh>
       <mesh castShadow geometry={(nodes.text as THREE.Mesh).geometry}>
-        <logoMaterial ref={logoMaterial} />
+        <logoMaterial ref={textMaterial} />
       </mesh>
       <mesh
         castShadow

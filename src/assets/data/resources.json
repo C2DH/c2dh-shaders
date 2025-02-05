@@ -38,6 +38,11 @@
         "name": "Sound based sphere visualization",
         "link": "https://organic-sphere.vercel.app/",
         "description": "An example to visualize sound."
+      },
+      {
+        "name": "Shpere visualization",
+        "link": "https://codepen.io/VoXelo/full/ZYzNvVz",
+        "description": "Can be used to visualize sound."
       }
     ],
 

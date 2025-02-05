@@ -15,6 +15,30 @@ const Resources = () => {
           </li>
         ))}
       </ul>
+      <p>YouTube</p>
+      <ul className="Functions flex flex-col flex-wrap">
+        {resourcesData.resources.youtube.map((func) => (
+          <li key={func.name}>
+            <a href={func.link} target="_blank">
+              {func.name}
+            </a>
+            {resourcesData.resources.youtube.indexOf(func) !==
+              resourcesData.resources.youtube.length - 1 && ","}
+          </li>
+        ))}
+      </ul>
+      <p>Sound Effects</p>
+      <ul className="Functions flex flex-col flex-wrap">
+        {resourcesData.resources.sound.map((func) => (
+          <li key={func.name}>
+            <a href={func.link} target="_blank">
+              {func.name}
+            </a>
+            {resourcesData.resources.sound.indexOf(func) !==
+              resourcesData.resources.sound.length - 1 && ","}
+          </li>
+        ))}
+      </ul>
       <p>GLSL Graphs</p>
       <ul className="Functions flex flex-col flex-wrap">
         {resourcesData.resources.graphs.map((func) => (

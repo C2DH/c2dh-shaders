@@ -32,6 +32,22 @@
         "description": "A shader editor with a node-based interface."
       }
     ],
+
+    "sound": [
+      {
+        "name": "Sound based sphere visualization",
+        "link": "https://organic-sphere.vercel.app/",
+        "description": "An example to visualize sound."
+      }
+    ],
+
+    "youtube": [
+      {
+        "name": "Bruno Simon's",
+        "link": "https://www.youtube.com/@BrunoSimon",
+        "description": "A channel with shader tutorials made by Bruno Simon."
+      }
+    ],
     "graphs": [
       {
         "name": "GLSL Grapher",

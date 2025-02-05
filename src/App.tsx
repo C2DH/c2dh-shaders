@@ -77,8 +77,9 @@ function App() {
       </Button>
 
       <Routes>
-        <Route path="/" element={<Page.Introduction />} />
-        <Route path="/logoc2dh" element={<Page.LogoC2dh />} />
+        {/* <Route path="/" element={<Page.Introduction />} /> */}
+        <Route path="/" element={<Page.LogoC2dh />} />
+        <Route path="/particals" element={<Page.Particals />} />
       </Routes>
     </div>
   );

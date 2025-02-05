@@ -5,12 +5,13 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), glsl(), tailwindcss()],
-  module: {
-    rules: [
-      {
-        test: /\.glsl$/,
-        use: "raw-loader",
-      },
-    ],
-  },
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.glsl$/,
+  //       use: "raw-loader",
+  //     },
+  //   ],
+  // },
+  assetsInclude: ["**/*.glsl"],
 });

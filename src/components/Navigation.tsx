@@ -18,11 +18,14 @@ const Navigation = ({
             Documentation
           </button>
         </li>
-        <li>
+        {/* <li>
           <Link to="/">Introduction</Link>
+        </li> */}
+        <li>
+          <Link to="/">Logo C2DH</Link>
         </li>
         <li>
-          <Link to="/logoc2dh">Logo C2DH</Link>
+          <Link to="/particals">Particals</Link>
         </li>
       </ul>
     </nav>

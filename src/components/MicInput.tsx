@@ -61,7 +61,7 @@ const MicInput: React.FC<MicInputProps> = ({ onAudioData }) => {
   }, [isListening, onAudioData]);
 
   return (
-    <div className="absolute z-8 w-full flex justify-center bottom-20">
+    <div className="absolute z-2 w-full flex justify-center bottom-20">
       <Button
         onClick={() => setIsListening(!isListening)}
         className={`light ${isListening ? "" : "inactive"}`}

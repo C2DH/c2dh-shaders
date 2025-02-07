@@ -7,7 +7,7 @@ import {
 } from "@react-three/drei";
 import { useRef, FC, useState } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useControls } from "leva";
+// import { useControls } from "leva";
 import fragmentShaderSound from "../../shaders/mic_Input/fragment.glsl?raw";
 import vertexShaderSound from "../../shaders/mic_Input/vertex.glsl?raw";
 import MicInput from "../../components/MicInput";
@@ -64,9 +64,9 @@ const CubeAnnualReport: FC<{
   materials.White.transparent = true;
   materials.White.opacity = 0.8;
 
-  const { uColor } = useControls({
-    uColor: "#70c1ff", // Default color
-  });
+  // const { uColor } = useControls({
+  //   uColor: "#70c1ff", // Default color
+  // });
 
   useFrame(() => {
     if (cubeMaterial.current) {
@@ -80,7 +80,7 @@ const CubeAnnualReport: FC<{
   useFrame((_, delta) => {
     if (cubeMaterial.current) {
       cubeMaterial.current.uTime += delta;
-      cubeMaterial.current.uColor = new THREE.Color(uColor);
+      // cubeMaterial.current.uColor = new THREE.Color(uColor);
     }
   });
 

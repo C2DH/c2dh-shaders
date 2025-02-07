@@ -12,7 +12,7 @@ const Navigation = ({
 }: NavigationProps) => {
   return (
     <nav className="flex flex-col menu_panel">
-      <ul>
+      <ul className="mt-6">
         <li>
           <button onClick={() => setShowDocumentation(!showDocumentation)}>
             Documentation

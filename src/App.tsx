@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Page from "./pages/Page";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import { Menu, CodeBrackets, Xmark } from "iconoir-react";
 import Navigation from "./components/Navigation";
@@ -20,6 +20,20 @@ function App() {
   const [showDocumentation, setShowDocumentation] = useState(true);
   const { showGLSL, setShowGLSL, showTS, setShowTS } =
     useGlobalState() as GlobalState;
+
+  // Update showGLSL based on showMenu
+  useEffect(() => {
+    if (!showCoodeMenu) {
+      setShowGLSL(true);
+    }
+  }, [showCoodeMenu]);
+
+  useEffect(() => {
+    if (!showTS && !showGLSL) {
+      console.log("Closing Code Menu");
+      setShowCodeMenu(!showCoodeMenu);
+    }
+  }, [showTS, showGLSL]); // Correct dependencies
 
   return (
     <div
@@ -64,7 +78,9 @@ function App() {
       <Button
         ariaLabel="Show Code"
         className="code_panel_btn circle absolute mt-5 ml-6 z-4"
-        onClick={() => setShowCodeMenu(!showCoodeMenu)}
+        onClick={() => {
+          setShowCodeMenu(!showCoodeMenu);
+        }}
       >
         <CodeBrackets />
       </Button>

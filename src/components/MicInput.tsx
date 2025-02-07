@@ -1,11 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import Button from "./Button";
+import { Microphone } from "iconoir-react";
+import useGlobalState from "./store";
 
 interface MicInputProps {
   onAudioData: (data: number) => void; // Now sending a single number
 }
 
+interface GlobalState {
+  isListening: boolean;
+  setIsListening: (isListening: boolean) => void;
+}
+
 const MicInput: React.FC<MicInputProps> = ({ onAudioData }) => {
-  const [isListening, setIsListening] = useState(false);
+  const { isListening, setIsListening } = useGlobalState() as GlobalState;
+
   const audioRef = useRef<AnalyserNode | null>(null);
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const contextRef = useRef<AudioContext | null>(null);
@@ -14,16 +23,20 @@ const MicInput: React.FC<MicInputProps> = ({ onAudioData }) => {
     if (!isListening) return;
 
     const initAudio = async () => {
-      const AudioContext =
-        window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContext = (window.AudioContext ||
+        (window as any).webkitAudioContext) as typeof window.AudioContext;
       contextRef.current = new AudioContext();
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-      sourceRef.current = contextRef.current.createMediaStreamSource(stream);
-      audioRef.current = contextRef.current.createAnalyser();
-      audioRef.current.fftSize = 32; // Lower FFT size for efficiency
+      if (contextRef.current) {
+        sourceRef.current = contextRef.current.createMediaStreamSource(stream);
+        audioRef.current = contextRef.current.createAnalyser();
+        audioRef.current.fftSize = 32; // Lower FFT size for efficiency
+      }
 
-      sourceRef.current.connect(audioRef.current);
+      if (sourceRef.current && audioRef.current) {
+        sourceRef.current.connect(audioRef.current);
+      }
 
       const update = () => {
         if (!audioRef.current) return;
@@ -45,16 +58,20 @@ const MicInput: React.FC<MicInputProps> = ({ onAudioData }) => {
     };
 
     initAudio();
-
-    return () => {
-      contextRef.current?.close();
-    };
   }, [isListening, onAudioData]);
 
   return (
-    <button onClick={() => setIsListening((prev) => !prev)}>
-      {isListening ? "Stop Mic" : "Start Mic"}
-    </button>
+    <div className="absolute z-8 w-full flex justify-center bottom-20">
+      <Button
+        onClick={() => setIsListening(!isListening)}
+        className={`light ${isListening ? "" : "inactive"}`}
+      >
+        <i>
+          <Microphone />
+        </i>
+        <span>{isListening ? "Stop Mic" : "Start Mic"}</span>
+      </Button>
+    </div>
   );
 };
 

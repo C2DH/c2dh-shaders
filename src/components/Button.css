@@ -1,9 +1,24 @@
-button.circle {
+button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
   border-radius: 50%;
+  height: 48px;
+  text-transform: uppercase;
+}
+
+button.circle {
+  width: 48px;
   background-color: var(--accent);
+}
+
+button.light {
+  border: 2px solid var(--white);
+  color: var(--white);
+  border-radius: 24px;
+  padding: 0 1rem;
+}
+
+button i ~ span {
+  margin-left: 0.5rem;
 }

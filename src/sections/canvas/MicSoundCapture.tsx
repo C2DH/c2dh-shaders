@@ -11,6 +11,7 @@ import { useControls } from "leva";
 import fragmentShaderSound from "../../shaders/mic_Input/fragment.glsl?raw";
 import vertexShaderSound from "../../shaders/mic_Input/vertex.glsl?raw";
 import MicInput from "../../components/MicInput";
+import useGlobalState from "../../components/store";
 
 // Extend ShaderMaterial to include custom properties
 declare module "three" {
@@ -18,6 +19,10 @@ declare module "three" {
     uTime: number;
     uColor: THREE.Color;
   }
+}
+
+interface GlobalState {
+  isListening: boolean;
 }
 
 // Extend JSX IntrinsicElements to include soundMaterial
@@ -35,7 +40,7 @@ const SoundMaterial = shaderMaterial(
   {
     uTime: 0,
     uColor: new THREE.Color("#70c1ff"),
-    uAudioData: 1, // Default value
+    uAudioData: 0, // Default value
     transparent: true,
     side: THREE.DoubleSide,
     depthWrite: false,
@@ -53,6 +58,7 @@ const CubeAnnualReport: FC<{
 }> = ({ audioValue, ...props }) => {
   const { nodes, materials } = useGLTF("/cubeAnnualReport.glb");
   const cubeMaterial = useRef<THREE.ShaderMaterial>(null);
+  const { isListening } = useGlobalState() as GlobalState;
 
   (materials.White as THREE.MeshStandardMaterial).roughness = 1;
   materials.White.transparent = true;
@@ -64,7 +70,9 @@ const CubeAnnualReport: FC<{
 
   useFrame(() => {
     if (cubeMaterial.current) {
-      cubeMaterial.current.uniforms.uAudioData.value = audioValue;
+      cubeMaterial.current.uniforms.uAudioData.value = isListening
+        ? audioValue
+        : 0;
       // console.log("audioValue", cubeMaterial.current.uniforms.uAudioData.value);
     }
   });
@@ -99,7 +107,7 @@ const CanvasViz: FC = () => {
 
   return (
     <>
-      <pre>Mic Level: {audioValue.toFixed(2)}</pre>
+      {/* <pre>Mic Level: {audioValue.toFixed(2)}</pre> */}
       <MicInput onAudioData={setAudioValue} />
       <Canvas
         shadows

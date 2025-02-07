@@ -15,7 +15,7 @@ interface GlobalState {
 }
 
 function App() {
-  const [showCoodeMenu, setShowCodeMenu] = useState(false);
+  const [showCoodeMenu, setShowCodeMenu] = useState(true);
   const [showMenu, setMenu] = useState(false);
   const [showDocumentation, setShowDocumentation] = useState(true);
   const { showGLSL, setShowGLSL, showTS, setShowTS } =
@@ -80,6 +80,7 @@ function App() {
         {/* <Route path="/" element={<Page.Introduction />} /> */}
         <Route path="/" element={<Page.LogoC2dh />} />
         <Route path="/particals" element={<Page.Particals />} />
+        <Route path="/mic-input" element={<Page.MicInput />} />
       </Routes>
     </div>
   );

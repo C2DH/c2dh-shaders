@@ -7,6 +7,12 @@ import {
 } from "@react-three/drei";
 import { useRef, FC } from "react";
 
+import { useGLTF } from "@react-three/drei";
+import { useControls } from "leva";
+import fragmentShaderLogo from "../../shaders/logo_c2dh/fragment.glsl?raw";
+import vertexShaderLogo from "../../shaders/logo_c2dh/vertex.glsl?raw";
+import random2D from "../../shaders/logo_c2dh/includes/random2D.glsl?raw"; // Import random2D shader
+
 // Extend ShaderMaterial to include custom properties
 declare module "three" {
   interface ShaderMaterial {
@@ -14,11 +20,6 @@ declare module "three" {
     uColor: THREE.Color;
   }
 }
-import { useGLTF } from "@react-three/drei";
-import { useControls } from "leva";
-import fragmentShaderLogo from "../../shaders/logo_c2dh/fragment.glsl?raw";
-import vertexShaderLogo from "../../shaders/logo_c2dh/vertex.glsl?raw";
-import random2D from "../../shaders/logo_c2dh/includes/random2D.glsl?raw"; // Import random2D shader
 
 // Extend JSX IntrinsicElements to include logoMaterial
 declare module "@react-three/fiber" {

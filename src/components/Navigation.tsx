@@ -27,6 +27,9 @@ const Navigation = ({
         <li>
           <Link to="/particals">Particals</Link>
         </li>
+        <li>
+          <Link to="/mic-input">Microphone Input</Link>
+        </li>
       </ul>
     </nav>
   );

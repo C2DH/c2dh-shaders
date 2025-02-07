@@ -34,7 +34,7 @@ const ParticalsMaterial = shaderMaterial(
       sizes.height * sizes.pixelRatio
     ),
     uPointSize: 1.0,
-    uPictureTexture: textureLoader.load("./img/particals/logo_c2dh.png"),
+    uPictureTexture: textureLoader.load("./img/particals/picture-1.png"),
     // blending: THREE.AdditiveBlending,
   },
   vertexShaderParticals,

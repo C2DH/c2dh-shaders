@@ -76,6 +76,16 @@ a:hover {
   z-index: var(--z-canvas);
 }
 
+@media screen and (max-width: 768px) {
+  .code {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+}
+
 pre,
 code {
   display: block;

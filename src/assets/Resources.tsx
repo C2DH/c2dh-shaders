@@ -7,7 +7,7 @@ const Resources = () => {
       <ul className="Functions flex flex-col flex-wrap">
         {resourcesData.resources.websites.map((func) => (
           <li key={func.name}>
-            <a href={func.link} target="_blank">
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
               {func.name}
             </a>
             {resourcesData.resources.websites.indexOf(func) !==
@@ -15,11 +15,23 @@ const Resources = () => {
           </li>
         ))}
       </ul>
+      <p>Inspiration</p>
+      <ul className="Functions flex flex-col flex-wrap">
+        {resourcesData.resources.inspiration.map((func) => (
+          <li key={func.name}>
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
+              {func.name}
+            </a>
+            {resourcesData.resources.inspiration.indexOf(func) !==
+              resourcesData.resources.inspiration.length - 1 && ","}
+          </li>
+        ))}
+      </ul>
       <p>YouTube</p>
       <ul className="Functions flex flex-col flex-wrap">
         {resourcesData.resources.youtube.map((func) => (
           <li key={func.name}>
-            <a href={func.link} target="_blank">
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
               {func.name}
             </a>
             {resourcesData.resources.youtube.indexOf(func) !==
@@ -27,13 +39,35 @@ const Resources = () => {
           </li>
         ))}
       </ul>
+      <p>Tutorials</p>
+      <ul className="Functions flex flex-col flex-wrap">
+        {resourcesData.resources.tutorials.map((func) => (
+          <li key={func.name}>
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
+              {func.name}
+            </a>
+            {func.code && (
+              <a href={func.code} target="_blank" rel="noopener noreferrer">
+                / Code
+              </a>
+            )}
+            {resourcesData.resources.tutorials.indexOf(func) !==
+              resourcesData.resources.tutorials.length - 1 && ","}
+          </li>
+        ))}
+      </ul>
       <p>Sound Effects</p>
       <ul className="Functions flex flex-col flex-wrap">
         {resourcesData.resources.sound.map((func) => (
           <li key={func.name}>
-            <a href={func.link} target="_blank">
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
               {func.name}
             </a>
+            {func.code && (
+              <a href={func.code} target="_blank" rel="noopener noreferrer">
+                / Code
+              </a>
+            )}
             {resourcesData.resources.sound.indexOf(func) !==
               resourcesData.resources.sound.length - 1 && ","}
           </li>
@@ -43,7 +77,7 @@ const Resources = () => {
       <ul className="Functions flex flex-col flex-wrap">
         {resourcesData.resources.graphs.map((func) => (
           <li key={func.name}>
-            <a href={func.link} target="_blank">
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
               {func.name}
             </a>
             {resourcesData.resources.graphs.indexOf(func) !==
@@ -55,7 +89,7 @@ const Resources = () => {
       <ul className="Functions flex flex-col flex-wrap">
         {resourcesData.resources.noises.map((func) => (
           <li key={func.name}>
-            <a href={func.link} target="_blank">
+            <a href={func.link} target="_blank" rel="noopener noreferrer">
               {func.name}
             </a>
             {resourcesData.resources.noises.indexOf(func) !==

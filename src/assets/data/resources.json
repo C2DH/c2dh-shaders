@@ -2,6 +2,11 @@
   "resources": {
     "websites": [
       {
+        "name": "😍😍😍 Book of shaders documentation",
+        "link": "https://thebookofshaders.com/",
+        "description": "A gentle introduction to GLSL."
+      },
+      {
         "name": "Shaderific documentation",
         "link": "https://shaderific.com/glsl.html",
         "description": "A comprehensive guide to GLSL."
@@ -10,11 +15,6 @@
         "name": "SKronos Group OpenGL reference pages",
         "link": "https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/indexflat.php",
         "description": "Official OpenGL reference pages."
-      },
-      {
-        "name": "😍😍😍 Book of shaders documentation",
-        "link": "https://thebookofshaders.com/",
-        "description": "A gentle introduction to GLSL."
       },
       {
         "name": "Shader Toy",
@@ -43,6 +43,12 @@
         "name": "Shpere visualization",
         "link": "https://codepen.io/VoXelo/full/ZYzNvVz",
         "description": "Can be used to visualize sound."
+      },
+      {
+        "name": "Torus Sound Visualization",
+        "link": "https://mnmxmx.github.io/audio-visualizer-torus/dst/",
+        "code": "https://github.com/mnmxmx/audio-visualizer-torus",
+        "description": "Can be used to visualize sound."
       }
     ],
 
@@ -51,6 +57,36 @@
         "name": "Bruno Simon's",
         "link": "https://www.youtube.com/@BrunoSimon",
         "description": "A channel with shader tutorials made by Bruno Simon."
+      },
+      {
+        "name": "Yuri Artiukh / Akella",
+        "link": "https://www.youtube.com/@akella_",
+        "description": "A channel with shader tutorials made by Yuri Artiukh."
+      },
+      {
+        "name": "Anderson Mancini - Creative Developer",
+        "link": "https://www.youtube.com/@AndersonMancini",
+        "description": "A channel with shader tutorials made by Anderson Mancini."
+      }
+    ],
+    "tutorials": [
+      {
+        "name": "Blog Maxim Eheckel",
+        "link": "https://blog.maximeheckel.com/",
+        "description": "Here, I share through my writing my experience as a frontend engineer and everything I'm learning about on React, Shaders, React Three Fiber, Framer Motion, and more."
+      },
+      {
+        "name": "Dragon Ball Visualization ",
+        "link": "https://stylized-orb.vercel.app/",
+        "code": "https://github.com/otanodesignco/stylized-orb",
+        "description": "Here, I share through my writing my experience as a frontend engineer and everything I'm learning about on React, Shaders, React Three Fiber, Framer Motion, and more."
+      }
+    ],
+    "inspiration": [
+      {
+        "name": "Anoyo Shader Experiments",
+        "link": "https://guilanier.github.io/anoyo/",
+        "description": "A collection of shader experiments."
       }
     ],
     "graphs": [

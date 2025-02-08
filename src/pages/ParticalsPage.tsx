@@ -7,7 +7,6 @@ import CanvasViz from "../sections/canvas/ParticalsCanvas.js";
 const ParticalsPage = () => {
   return (
     <div className="experiment flex">
-      <h1 className="absolte mt-24">Particals</h1>
       <CodeSection
         VertexShader={VertexShader}
         FragmentShader={FragmentShader}

@@ -7,7 +7,6 @@ import CanvasViz from "../sections/canvas/MicSoundCapture.tsx";
 const MicInputPage = () => {
   return (
     <div className="experiment flex">
-      <h1 className="absolte mt-24">Experiment 1</h1>
       <CodeSection
         VertexShader={VertexShader}
         FragmentShader={FragmentShader}

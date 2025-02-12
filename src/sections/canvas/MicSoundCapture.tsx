@@ -56,7 +56,7 @@ extend({ SoundMaterial });
 const CubeAnnualReport: FC<{
   audioValue: number;
 }> = ({ audioValue, ...props }) => {
-  const { nodes, materials } = useGLTF("/cubeAnnualReport.glb");
+  const { nodes, materials } = useGLTF("./glb/cubeAnnualReport.glb");
   const cubeMaterial = useRef<THREE.ShaderMaterial>(null);
   const { isListening } = useGlobalState() as GlobalState;
 
@@ -99,7 +99,7 @@ const CubeAnnualReport: FC<{
   );
 };
 
-useGLTF.preload("./cubeAnnualReport.glb");
+useGLTF.preload("./glb/cubeAnnualReport.glb");
 
 // Main Canvas Component
 const CanvasViz: FC = () => {

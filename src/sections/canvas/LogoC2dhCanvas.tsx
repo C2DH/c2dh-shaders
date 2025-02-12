@@ -53,7 +53,7 @@ extend({ LogoMaterial });
 // LogoC2dh Component
 const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
   const logoMaterial = useRef<THREE.ShaderMaterial>(null);
-  const { nodes } = useGLTF("./c2dh_logo.glb");
+  const { nodes } = useGLTF("./glb/c2dh_logo.glb");
 
   const { uColor } = useControls({
     uColor: "#70c1ff", // Default color
@@ -71,7 +71,7 @@ const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
       <mesh
         castShadow
         receiveShadow
-        geometry={(nodes.logo as THREE.Mesh).geometry}
+        geometry={(nodes.logoC2dh as THREE.Mesh).geometry}
       >
         <logoMaterial ref={logoMaterial} />
       </mesh>
@@ -79,13 +79,13 @@ const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
   );
 };
 
-useGLTF.preload("./c2dh_logo.glb");
+useGLTF.preload("./glb/c2dh_logo.glb");
 
 // CubeAnnualReport Component
 const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
   props
 ) => {
-  const { nodes, materials } = useGLTF("/cubeAnnualReport.glb");
+  const { nodes, materials } = useGLTF("./glb/cubeAnnualReport.glb");
   const textMaterial = useRef<THREE.ShaderMaterial>(null);
   const cubeMaterial = useRef<THREE.ShaderMaterial>(null);
 
@@ -126,7 +126,7 @@ const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
   );
 };
 
-useGLTF.preload("./cubeAnnualReport.glb");
+useGLTF.preload("./glb/cubeAnnualReport.glb");
 
 // Main Canvas Component
 const CanvasViz: FC = () => {

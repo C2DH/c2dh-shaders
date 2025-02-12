@@ -30,6 +30,9 @@ const Navigation = ({
         <li>
           <Link to="/mic-input">Microphone Input</Link>
         </li>
+        <li>
+          <Link to="/morphing">Morphing</Link>
+        </li>
       </ul>
     </nav>
   );

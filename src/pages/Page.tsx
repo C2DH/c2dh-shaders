@@ -3,6 +3,7 @@ import "../../src/style.css";
 import LogoC2dh from "./LogoC2dhPage";
 import ParticalsPage from "./ParticalsPage";
 import MicInputPage from "./MicInputPage";
+import MorphingPage from "./MorphingPage";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -31,6 +32,11 @@ const Page = {
   MicInput: () => (
     <PageWrapper>
       <MicInputPage />
+    </PageWrapper>
+  ),
+  Morphing: () => (
+    <PageWrapper>
+      <MorphingPage />
     </PageWrapper>
   ),
 };

@@ -97,6 +97,7 @@ function App() {
         <Route path="/" element={<Page.LogoC2dh />} />
         <Route path="/particals" element={<Page.Particals />} />
         <Route path="/mic-input" element={<Page.MicInput />} />
+        <Route path="/morphing" element={<Page.Morphing />} />
       </Routes>
     </div>
   );

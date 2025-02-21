@@ -1,28 +1,37 @@
 import * as THREE from "three";
-import { useRef, useState, useEffect, FC } from "react";
-import { Canvas, useThree, extend, ReactThreeFiber } from "@react-three/fiber";
-import {
-  OrbitControls,
-  shaderMaterial,
-  PerspectiveCamera,
-  useGLTF,
-} from "@react-three/drei";
-import { useSpring, animated } from "@react-spring/three";
+import { useState, useEffect, FC } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
+// import { useSpring, animated } from "@react-spring/three";
 
-import { useControls } from "leva";
+// import { useControls } from "leva";
 
+import simplexNoise3d from "../../shaders/morphing/includes/simplexNoise3d.glsl?raw";
 import fragmentMorphing from "../../shaders/morphing/fragment.glsl?raw";
 import vertexMorphing from "../../shaders/morphing/vertex.glsl?raw";
 
 const Particles = () => {
-  const [particles, setParticles] = useState<any>(null);
+  interface ParticlesData {
+    index: number;
+    maxCount: number;
+    positions: THREE.Float32BufferAttribute[];
+    geometry: THREE.BufferGeometry;
+    material: THREE.ShaderMaterial;
+    points: THREE.Points;
+    colorA: string;
+    colorB: string;
+  }
+
+  const setParticles = useState<ParticlesData | null>(null)[1];
   const { scene } = useThree();
-  const gltf = useGLTF("./models.glb"); // Use useGLTF to load the model
+  const gltf = useGLTF("./glb/logos.glb"); // Use useGLTF to load the model
 
   // const [{ uProgress }, set] = useSpring(() => ({
   //   uProgress: 0,
   //   config: { duration: 3000 },
   // }));
+
+  console.log(gltf.scene.children);
 
   useEffect(() => {
     if (gltf) {
@@ -51,7 +60,8 @@ const Particles = () => {
 
       // Positions
       const positions = gltf.scene.children.map(
-        (child: any) => child.geometry.attributes.position
+        (child: THREE.Object3D) =>
+          (child as THREE.Mesh).geometry.attributes.position
       );
 
       particlesData.maxCount = 0;
@@ -98,7 +108,7 @@ const Particles = () => {
       );
       particlesData.geometry.setAttribute(
         "aPositionTarget",
-        particlesData.positions[3]
+        particlesData.positions[1]
       );
       particlesData.geometry.setAttribute(
         "aSize",
@@ -111,7 +121,7 @@ const Particles = () => {
 
       particlesData.material = new THREE.ShaderMaterial({
         uniforms: {
-          uSize: new THREE.Uniform(0.4),
+          uSize: new THREE.Uniform(0.04),
           uResolution: new THREE.Uniform(
             new THREE.Vector2(
               window.innerWidth * window.devicePixelRatio,
@@ -124,8 +134,11 @@ const Particles = () => {
         },
         blending: THREE.AdditiveBlending,
         depthWrite: false,
+        vertexShader: `
+        ${simplexNoise3d}
+        ${vertexMorphing}
+        `,
         fragmentShader: fragmentMorphing,
-        vertexShader: vertexMorphing,
       });
 
       // Points
@@ -135,6 +148,8 @@ const Particles = () => {
       );
       particlesData.points.frustumCulled = false;
       scene.add(particlesData.points);
+
+      particlesData.points.scale.set(2, 2, 2);
 
       setParticles(particlesData);
     }
@@ -179,7 +194,6 @@ const CanvasViz: FC = () => {
         autoRotateSpeed={0.5}
       />
       <PerspectiveCamera makeDefault position={[0, 0, 3]} />
-      {/* <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/dancing_hall_1k.hdr" /> */}
     </Canvas>
   );
 };

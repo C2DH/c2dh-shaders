@@ -67,6 +67,26 @@
         "name": "Anderson Mancini - Creative Developer",
         "link": "https://www.youtube.com/@AndersonMancini",
         "description": "A channel with shader tutorials made by Anderson Mancini."
+      },
+      {
+        "name": "GLSL Snacks",
+        "link": "https://www.youtube.com/playlist?list=PLjcjAqAnHd1HD2Czzgp5GZtG9fnUkqLlV",
+        "description": "Short useful videos to learn GLSL."
+      },
+      {
+        "name": "3D JavaScript Music Visualizer",
+        "link": "https://www.youtube.com/watch?v=C4IR44TXbE8",
+        "description": "A tutorial to create a 3D music visualizer."
+      },
+      {
+        "name": "Coding a 3D Audio Waveform Visualizer with JavaScript + Three.js",
+        "link": "https://www.youtube.com/watch?v=tQL1VLTJTnc",
+        "description": "A tutorial to create a 3D audio waveform visualizer."
+      },
+      {
+        "name": "🤩 Creating an Interactive Spectrogram Using Three.js and GLSL Shaders",
+        "link": "https://www.youtube.com/watch?v=_74vNHkvIxY",
+        "description": "In this video I will walk you through how to make a highly optimized spectrogram visualization in the web browser using three.js and GLSL Shaders."
       }
     ],
     "tutorials": [
@@ -80,6 +100,12 @@
         "link": "https://stylized-orb.vercel.app/",
         "code": "https://github.com/otanodesignco/stylized-orb",
         "description": "Here, I share through my writing my experience as a frontend engineer and everything I'm learning about on React, Shaders, React Three Fiber, Framer Motion, and more."
+      },
+      {
+        "name": "Creating Audio-Reactive Visuals ",
+        "link": "https://tympanus.net/Tutorials/ParticlesMusicVisualizer/",
+        "code": "https://tympanus.net/codrops/2023/12/19/creating-audio-reactive-visuals-with-dynamic-particles-in-three-js/",
+        "description": "We’ll walk through the concepts and techniques used to synchronize audio frequencies and tempo, creating a dynamic visualizer with procedural particle animations."
       }
     ],
     "inspiration": [
@@ -87,6 +113,16 @@
         "name": "Anoyo Shader Experiments",
         "link": "https://guilanier.github.io/anoyo/",
         "description": "A collection of shader experiments."
+      },
+      {
+        "name": "Loop Waveform Visualizer",
+        "link": "https://www.uberviz.io/viz/loop/",
+        "description": "A visualizer for looping audio waveform."
+      },
+      {
+        "name": "A visualizer for sound using 3D models",
+        "link": "https://soundscape.world/",
+        "description": "A visualizer for sound using 3D models."
       }
     ],
     "graphs": [

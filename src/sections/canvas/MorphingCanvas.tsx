@@ -1,10 +1,9 @@
 import * as THREE from "three";
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, useRef } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
-// import { useSpring, animated } from "@react-spring/three";
-
-// import { useControls } from "leva";
+import { useControls, button } from "leva";
+import gsap from "gsap";
 
 import simplexNoise3d from "../../shaders/morphing/includes/simplexNoise3d.glsl?raw";
 import fragmentMorphing from "../../shaders/morphing/fragment.glsl?raw";
@@ -22,30 +21,82 @@ const Particles = () => {
     colorB: string;
   }
 
-  const setParticles = useState<ParticlesData | null>(null)[1];
+  const [particlesData, setParticles] = useState<ParticlesData | null>(null);
+  const [index, setIndex] = useState(0); // State for the current index
+  const [animationActive, setAnimationActive] = useState(false); // State for the animation
   const { scene } = useThree();
-  const gltf = useGLTF("./glb/logos.glb"); // Use useGLTF to load the model
+  const gltf = useGLTF("./glb/logos.glb");
 
-  // const [{ uProgress }, set] = useSpring(() => ({
-  //   uProgress: 0,
-  //   config: { duration: 3000 },
-  // }));
+  // Use Leva to create buttons
+  useControls({
+    "Set Index to 0": button(() => setIndex(0)),
+    "Set Index to 1": button(() => setIndex(1)),
+    "Auto Morph": {
+      value: animationActive,
+      onChange: setAnimationActive, // Update state when checkbox is toggled
+    },
+  });
 
-  console.log(gltf.scene.children);
+  // Morph function to animate particles
+  const morph = (targetIndex: number) => {
+    if (!particlesData) return;
+
+    // Update attributes
+    particlesData.geometry.setAttribute(
+      "position",
+      particlesData.positions[particlesData.index]
+    );
+    particlesData.geometry.setAttribute(
+      "aPositionTarget",
+      particlesData.positions[targetIndex]
+    );
+
+    // Animate uProgress using GSAP
+    gsap.fromTo(
+      particlesData.material.uniforms.uProgress,
+      { value: 0 }, // Start value
+      {
+        value: 1, // End value
+        duration: 3, // Animation duration (3 seconds)
+        ease: "linear", // Easing function
+        onComplete: () => {
+          // Save the new index after animation completes
+          particlesData.index = targetIndex;
+        },
+      }
+    );
+  };
+
+  // Trigger morph animation when index changes
+  useEffect(() => {
+    if (particlesData) {
+      morph(index);
+    }
+  }, [index, particlesData]);
+
+  // Auto-morphing logic
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (animationActive) {
+      intervalRef.current = setInterval(() => {
+        setIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
+      }, 5000); // 5 seconds interval
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    // Cleanup interval on component unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [animationActive]);
 
   useEffect(() => {
     if (gltf) {
-      interface ParticlesData {
-        index: number;
-        maxCount: number;
-        positions: THREE.Float32BufferAttribute[];
-        geometry: THREE.BufferGeometry;
-        material: THREE.ShaderMaterial;
-        points: THREE.Points;
-        colorA: string;
-        colorB: string;
-      }
-
       const particlesData: ParticlesData = {
         index: 0,
         maxCount: 0,
@@ -56,7 +107,6 @@ const Particles = () => {
         colorA: "#ff7300",
         colorB: "#0091ff",
       };
-      particlesData.index = 0;
 
       // Positions
       const positions = gltf.scene.children.map(
@@ -104,7 +154,7 @@ const Particles = () => {
       particlesData.geometry = new THREE.BufferGeometry();
       particlesData.geometry.setAttribute(
         "position",
-        particlesData.positions[particlesData.index]
+        particlesData.positions[index]
       );
       particlesData.geometry.setAttribute(
         "aPositionTarget",
@@ -116,9 +166,6 @@ const Particles = () => {
       );
 
       // Material
-      particlesData.colorA = "#ff7300";
-      particlesData.colorB = "#0091ff";
-
       particlesData.material = new THREE.ShaderMaterial({
         uniforms: {
           uSize: new THREE.Uniform(0.04),
@@ -149,24 +196,11 @@ const Particles = () => {
       particlesData.points.frustumCulled = false;
       scene.add(particlesData.points);
 
-      particlesData.points.scale.set(2, 2, 2);
+      particlesData.points.scale.set(3, 3, 3);
 
       setParticles(particlesData);
     }
   }, [gltf]);
-
-  // const morph = (index: number) => {
-  //   if (particles) {
-  //     particles.geometry.attributes.position =
-  //       particles.positions[particles.index];
-  //     particles.geometry.attributes.aPositionTarget =
-  //       particles.positions[index];
-
-  //     set({ uProgress: 1 });
-
-  //     particles.index = index;
-  //   }
-  // };
 
   return null;
 };
@@ -179,10 +213,6 @@ const CanvasViz: FC = () => {
       gl={{ pixelRatio: Math.min(window.devicePixelRatio, 2), antialias: true }}
     >
       <color attach="background" args={["black"]} />
-      <directionalLight position={[-3, 0, 0]} intensity={9} />
-      <directionalLight position={[3, 0, 0]} intensity={9} />
-      <directionalLight position={[0, 0, -3]} intensity={9} />
-      <directionalLight position={[0, 0, 3]} intensity={9} />
 
       <Particles />
 

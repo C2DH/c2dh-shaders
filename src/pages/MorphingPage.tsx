@@ -1,6 +1,6 @@
 import CodeSection from "../sections/CodeSection.tsx";
-import FragmentShader from "../shaders/logo_c2dh/fragment.glsl?raw";
-import VertexShader from "../shaders/logo_c2dh/vertex.glsl?raw";
+import FragmentShader from "../shaders/morphing/fragment.glsl?raw";
+import VertexShader from "../shaders/morphing/vertex.glsl?raw";
 import CanvasVizRaw from "../sections/canvas/MorphingCanvas.tsx?raw";
 import CanvasViz from "../sections/canvas/MorphingCanvas.tsx";
 

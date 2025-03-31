@@ -33,6 +33,9 @@ const Navigation = ({
         <li>
           <Link to="/morphing">Morphing</Link>
         </li>
+        <li>
+          <Link to="/earth">Earth</Link>
+        </li>
       </ul>
     </nav>
   );

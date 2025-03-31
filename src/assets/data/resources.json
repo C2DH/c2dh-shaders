@@ -30,6 +30,11 @@
         "name": "The Ultimate Shader Editor.",
         "link": "https://nodetoy.co/",
         "description": "A shader editor with a node-based interface."
+      },
+      {
+        "name": "Arragment of N nodes on a sphere",
+        "link": "https://bendwavy.org/pack/pack.htm",
+        "description": "Arragment of N nodes on a sphere"
       }
     ],
 

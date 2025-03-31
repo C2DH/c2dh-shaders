@@ -4,6 +4,7 @@ import LogoC2dh from "./LogoC2dhPage";
 import ParticalsPage from "./ParticalsPage";
 import MicInputPage from "./MicInputPage";
 import MorphingPage from "./MorphingPage";
+import EarthPage from "./EarthPage";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -37,6 +38,11 @@ const Page = {
   Morphing: () => (
     <PageWrapper>
       <MorphingPage />
+    </PageWrapper>
+  ),
+  Earth: () => (
+    <PageWrapper>
+      <EarthPage />
     </PageWrapper>
   ),
 };

@@ -54,6 +54,8 @@ const EarthPoints = ({
   const instancedMeshRef = useRef<THREE.InstancedMesh>(null);
   const [pixels, setPixels] = useState<number[][]>([]);
   const earthPointMaterial = useRef<THREE.ShaderMaterial>(null);
+  const tempGeometry = new THREE.PlaneGeometry(pointsSize, pointsSize);
+  const tempMaterial = new THREE.MeshBasicMaterial();
 
   // Load the world map and process pixel data
   useEffect(() => {
@@ -178,7 +180,7 @@ const EarthPoints = ({
   return (
     <instancedMesh
       ref={instancedMeshRef}
-      args={[null, null, positions.length / 3 || 1]} // Set initial count
+      args={[tempGeometry, tempMaterial, positions.length / 3 || 1]}
     >
       <planeGeometry args={[pointsSize, pointsSize]} />
       <earthPointMaterial ref={earthPointMaterial} />

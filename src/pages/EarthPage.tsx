@@ -1,6 +1,6 @@
 import CodeSection from "../sections/CodeSection.tsx";
-// import FragmentShader from "../shaders/morphing/fragment.glsl?raw";
-// import VertexShader from "../shaders/morphing/vertex.glsl?raw";
+import FragmentShader from "../shaders/earth/fragment.glsl?raw";
+import VertexShader from "../shaders/earth/vertex.glsl?raw";
 import CanvasVizRaw from "../sections/canvas/EarthCanvas.tsx?raw";
 import CanvasViz from "../sections/canvas/EarthCanvas.tsx";
 
@@ -8,8 +8,8 @@ const EarthCanvasPage = () => {
   return (
     <div className="experiment flex">
       <CodeSection
-        // VertexShader={}
-        // FragmentShader={}
+        VertexShader={VertexShader}
+        FragmentShader={FragmentShader}
         CanvasVizRaw={CanvasVizRaw}
       />
       <div className="canvas">

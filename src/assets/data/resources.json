@@ -111,6 +111,12 @@
         "link": "https://tympanus.net/Tutorials/ParticlesMusicVisualizer/",
         "code": "https://tympanus.net/codrops/2023/12/19/creating-audio-reactive-visuals-with-dynamic-particles-in-three-js/",
         "description": "We’ll walk through the concepts and techniques used to synchronize audio frequencies and tempo, creating a dynamic visualizer with procedural particle animations."
+      },
+      {
+        "name": "🌍 3D Earth is built with R3F ",
+        "link": "https://blog.olivierlarose.com/tutorials/3d-earth",
+        "code": "https://github.com/olivierlarose/3d-earth-scroll/tree/main",
+        "description": "A tutorial to create a 3D Earth with React Three Fiber."
       }
     ],
     "inspiration": [
@@ -128,6 +134,11 @@
         "name": "A visualizer for sound using 3D models",
         "link": "https://soundscape.world/",
         "description": "A visualizer for sound using 3D models."
+      },
+      {
+        "name": "🌎 3D Earth with countries borders",
+        "link": "https://globe.vladkrutenyuk.ru/",
+        "description": "A 3D globe with countries borders. You select a country and it will show you the borders."
       }
     ],
     "graphs": [

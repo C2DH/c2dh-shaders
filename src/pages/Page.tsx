@@ -5,6 +5,7 @@ import ParticalsPage from "./ParticalsPage";
 import MicInputPage from "./MicInputPage";
 import MorphingPage from "./MorphingPage";
 import EarthPage from "./EarthPage";
+import SoundwavePage from "./SoundwavePage";
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -43,6 +44,11 @@ const Page = {
   Earth: () => (
     <PageWrapper>
       <EarthPage />
+    </PageWrapper>
+  ),
+    Soundwave: () => (
+    <PageWrapper>
+      <SoundwavePage />
     </PageWrapper>
   ),
 };

@@ -1,5 +1,4 @@
 // src/utils/generateVisualizationData.ts
-import { AudioLoader } from 'three'
 
 interface AudioFrame {
   time: number

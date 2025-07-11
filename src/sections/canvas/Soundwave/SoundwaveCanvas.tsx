@@ -18,7 +18,7 @@ import {
   Group,
 } from 'three'
 import { exportToGLTF } from './threeExportUtils'
-import { SoundMesh } from '../../../components/SoundMesh'
+// import { SoundMesh } from '../../../components/SoundMesh'
 
 // Extend THREE for R3F
 extend({
@@ -47,10 +47,10 @@ interface LineVisualizerProps {
   useSavedData?: boolean // New prop to control data source
 }
 
-interface AudioFrame {
-  time: number
-  frequencyData: number[]
-}
+// interface AudioFrame {
+//   time: number
+//   frequencyData: number[]
+// }
 
 // Add this interface for the ref
 interface LineVisualizerRef {
@@ -321,9 +321,7 @@ const LineVisualizer = forwardRef<LineVisualizerRef, LineVisualizerProps>(
 
 const SoundwaveCanvas: React.FC = () => {
   const lineVisualizerRef = useRef<LineVisualizerRef>(null)
-  const [dimension, setDimension] = useState(
-    Math.min(window.innerHeight / 1.5, window.innerWidth / 1.5),
-  )
+  const [, setDimension] = useState(Math.min(window.innerHeight / 1.5, window.innerWidth / 1.5))
   const [currentTime, setCurrentTime] = useState<number>(0)
   const [duration, setDuration] = useState<number>(0)
   const [audioStarted, setAudioStarted] = useState<boolean>(false)

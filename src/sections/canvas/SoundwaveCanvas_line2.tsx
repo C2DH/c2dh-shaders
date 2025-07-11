@@ -20,7 +20,6 @@ import {
   Line,
   Group,
 } from 'three'
-import { SoundMesh } from '../../components/SoundMesh'
 
 // Extend THREE for R3F
 extend({
@@ -48,11 +47,6 @@ interface LineVisualizerProps {
   audioStarted?: boolean // Add this prop to control audio start
 }
 
-interface AudioFrame {
-  time: number
-  frequencyData: number[]
-}
-
 // Add this interface for the ref
 interface LineVisualizerRef {
   exportToGLTF: () => void
@@ -61,13 +55,7 @@ interface LineVisualizerRef {
 
 const LineVisualizer = forwardRef<LineVisualizerRef, LineVisualizerProps>(
   ({ songUrl, setDuration, setCurrentTime, duration, audioStarted }, ref) => {
-    const [audioFrames, setAudioFrames] = useState<AudioFrame[]>([])
-    const [isAnalyzing, setIsAnalyzing] = useState(false)
-    const [currentFrameIndex, setCurrentFrameIndex] = useState(0)
     const [frequencyDataCollection, setFrequencyDataCollection] = useState<Uint8Array[]>([])
-    const [preloadedFFTData, setPreloadedFFTData] = useState<Uint8Array[] | null>(null)
-    const [usingPreloadedData, setUsingPreloadedData] = useState(false)
-    const [preloadedDataIndex, setPreloadedDataIndex] = useState(0)
 
     const linesRef = useRef<THREE.Group>(null)
     const soundRef = useRef<THREE.Audio | null>(null)
@@ -78,46 +66,6 @@ const LineVisualizer = forwardRef<LineVisualizerRef, LineVisualizerProps>(
     const { camera } = useThree() // Get camera from useThree hook
 
     // Pre-analyze audio data
-    const analyzeAudioData = async (audioBuffer: AudioBuffer) => {
-      setIsAnalyzing(true)
-      console.log('Starting audio analysis...')
-
-      const frames: AudioFrame[] = []
-      const frameInterval = duration / lineNumber // 200ms intervals (same as your original)
-      // const totalFrames = Math.floor(Math.min(duration, audioBuffer.duration) / frameInterval) // 15 seconds max
-
-      // Analyze audio at regular intervals
-      for (let i = 0; i < frameInterval; i++) {
-        const time = i * frameInterval
-        const sampleIndex = Math.floor(time * audioBuffer.sampleRate)
-
-        // Get frequency data at this time point
-        const frequencyData = new Uint8Array(30)
-        const channelData = audioBuffer.getChannelData(0)
-
-        // Simple frequency analysis simulation
-        for (let j = 0; j < 30; j++) {
-          const startSample = Math.floor(sampleIndex + j * 1024)
-          const endSample = Math.min(startSample + 1024, channelData.length)
-
-          if (startSample < channelData.length) {
-            let sum = 0
-            for (let k = startSample; k < endSample; k++) {
-              sum += Math.abs(channelData[k])
-            }
-            frequencyData[j] = Math.min(255, sum * 1000) // Scale to 0-255 range
-          }
-        }
-
-        frames.push({
-          time,
-          frequencyData: Array.from(frequencyData),
-        })
-      }
-
-      setAudioFrames(frames)
-      setIsAnalyzing(false)
-    }
 
     // Audio setup
     useEffect(() => {
@@ -372,9 +320,7 @@ const LineVisualizer = forwardRef<LineVisualizerRef, LineVisualizerProps>(
 
 const SoundwaveCanvas: React.FC = () => {
   const lineVisualizerRef = useRef<LineVisualizerRef>(null)
-  const [dimension, setDimension] = useState(
-    Math.min(window.innerHeight / 1.5, window.innerWidth / 1.5),
-  )
+  const [, setDimension] = useState(Math.min(window.innerHeight / 1.5, window.innerWidth / 1.5))
   const [currentTime, setCurrentTime] = useState<number>(0)
   const [duration, setDuration] = useState<number>(0)
   const [audioStarted, setAudioStarted] = useState<boolean>(false)

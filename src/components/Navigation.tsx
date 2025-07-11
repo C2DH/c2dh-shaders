@@ -36,6 +36,9 @@ const Navigation = ({
         <li>
           <Link to="/earth">Earth</Link>
         </li>
+                <li>
+          <Link to="/soundwave">Soundwave</Link>
+        </li>
       </ul>
     </nav>
   );

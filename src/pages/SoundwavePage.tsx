@@ -1,8 +1,8 @@
-import CodeSection from "../sections/CodeSection.tsx";
-import FragmentShader from "../shaders/soundwave/fragment.glsl?raw";
-import VertexShader from "../shaders/soundwave/vertex.glsl?raw";
-import CanvasVizRaw from "../sections/canvas/SoundwaveCanvas.tsx?raw";
-import CanvasViz from "../sections/canvas/SoundwaveCanvas.tsx";
+import CodeSection from '../sections/CodeSection.tsx'
+import FragmentShader from '../shaders/soundwave/fragment.glsl?raw'
+import VertexShader from '../shaders/soundwave/vertex.glsl?raw'
+import CanvasVizRaw from '../sections/canvas/Soundwave/SoundwaveCanvas.tsx?raw'
+import CanvasViz from '../sections/canvas/Soundwave/SoundwaveCanvas.tsx'
 
 const EarthCanvasPage = () => {
   return (
@@ -17,7 +17,7 @@ const EarthCanvasPage = () => {
         <CanvasViz />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EarthCanvasPage;
+export default EarthCanvasPage

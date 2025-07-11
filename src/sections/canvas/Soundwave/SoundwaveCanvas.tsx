@@ -359,43 +359,43 @@ const SoundwaveCanvas: React.FC = () => {
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'left',
       }}
     >
-      <div className="absolute text-white top-0 z-10 flex flex-col">
+      <div className="absolute text-white top-5 z-2 flex flex-col">
         <span>Duration: {duration.toFixed(2)}s</span>
         <span>Current Time: {currentTime.toFixed(2)}s</span>
         <span>Mode: {useSavedData ? 'Saved Data' : 'Live Audio'}</span>
         <button
           onClick={handleExport}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 mt-2 rounded-[0px!important]"
         >
           Export GLTF
         </button>
         <button
           onClick={startAudio}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2"
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 mt-2 rounded-[0px!important]"
         >
           Start with Saved Data
         </button>
         <button
           onClick={startLiveAudio}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 mt-2 rounded-[0px!important]"
         >
           Start with Live Audio
         </button>
         <button
           onClick={() => lineVisualizerRef.current?.exportFrequencyData()}
-          className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mt-2"
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 mt-2 rounded-[0px!important]"
         >
           Export Saved Frequency Data
         </button>
-        <button
+        {/* <button
           onClick={() => lineVisualizerRef.current?.renderSavedFrequencyData()}
-          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mt-2"
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 mt-2 rounded-[0px!important]"
         >
           Load Saved Frequency Data
-        </button>
+        </button> */}
       </div>
       <Canvas gl={{ antialias: true }}>
         <ambientLight intensity={10} />

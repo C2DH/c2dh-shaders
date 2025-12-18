@@ -1,19 +1,17 @@
-import "../../src/style.css";
+import '../../src/style.css'
 // import Introduction from "./IntroductionPage";
-import LogoC2dh from "./LogoC2dhPage";
-import ParticalsPage from "./ParticalsPage";
-import MicInputPage from "./MicInputPage";
-import MorphingPage from "./MorphingPage";
-import EarthPage from "./EarthPage";
-import SoundwavePage from "./SoundwavePage";
+import LogoC2dh from './LogoC2dhPage'
+import ParticalsPage from './ParticalsPage'
+import MicInputPage from './MicInputPage'
+import MorphingPage from './MorphingPage'
+import EarthPage from './EarthPage'
+import FnrAwardPage from './FnrAwardPage'
 
 interface PageWrapperProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
-const PageWrapper = ({ children }: PageWrapperProps) => (
-  <div className="Page">{children}</div>
-);
+const PageWrapper = ({ children }: PageWrapperProps) => <div className="Page">{children}</div>
 
 const Page = {
   // Introduction: () => (
@@ -46,11 +44,11 @@ const Page = {
       <EarthPage />
     </PageWrapper>
   ),
-    Soundwave: () => (
+  FnrAward: () => (
     <PageWrapper>
-      <SoundwavePage />
+      <FnrAwardPage />
     </PageWrapper>
   ),
-};
+}
 
-export default Page;
+export default Page

@@ -1,22 +1,17 @@
-import { Link } from "react-router-dom";
-import "./Navigation.css";
+import { Link } from 'react-router-dom'
+import './Navigation.css'
 
 interface NavigationProps {
-  showDocumentation: boolean;
-  setShowDocumentation: (value: boolean) => void;
+  showDocumentation: boolean
+  setShowDocumentation: (value: boolean) => void
 }
 
-const Navigation = ({
-  showDocumentation,
-  setShowDocumentation,
-}: NavigationProps) => {
+const Navigation = ({ showDocumentation, setShowDocumentation }: NavigationProps) => {
   return (
     <nav className="flex flex-col menu_panel">
       <ul className="mt-6">
         <li>
-          <button onClick={() => setShowDocumentation(!showDocumentation)}>
-            Documentation
-          </button>
+          <button onClick={() => setShowDocumentation(!showDocumentation)}>Documentation</button>
         </li>
         {/* <li>
           <Link to="/">Introduction</Link>
@@ -36,12 +31,12 @@ const Navigation = ({
         <li>
           <Link to="/earth">Earth</Link>
         </li>
-                <li>
-          <Link to="/soundwave">Soundwave</Link>
+        <li>
+          <Link to="/fnr-award-2025">FNR Award 2025</Link>
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

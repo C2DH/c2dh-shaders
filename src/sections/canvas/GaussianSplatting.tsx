@@ -1,16 +1,22 @@
-import { SplatMesh } from '@sparkjsdev/spark'
+import { SplatMesh, SparkRenderer } from '@sparkjsdev/spark'
 import { useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
 function GaussianSplattingScene() {
-  const { scene } = useThree()
+  const { scene, gl } = useThree()
 
   useEffect(() => {
+    // Explicitly create SparkRenderer for GPU-accelerated splat sorting/rendering
+    // and proper lifecycle management (auto-created one is never cleaned up).
+    const sparkRenderer = new SparkRenderer({
+      renderer: gl,
+      view: { sort32: true }, // 32-bit GPU radix sort for higher precision
+    })
+    scene.add(sparkRenderer)
+
     const splat = new SplatMesh({ url: '/gs/test.sog' })
     splat.rotation.x = Math.PI
-    // splat.position.set(0, -1, 0)
-    // splat.rotation.y = Math.PI / 2
     scene.add(splat)
 
     void Promise.resolve(splat.initialized).catch((err: unknown) => {
@@ -19,9 +25,10 @@ function GaussianSplattingScene() {
 
     return () => {
       scene.remove(splat)
+      scene.remove(sparkRenderer)
       splat.dispose()
     }
-  }, [scene])
+  }, [scene, gl])
 
   return null
 }

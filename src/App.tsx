@@ -94,6 +94,7 @@ function App() {
         <Route path="/mic-input" element={<Page.MicInput />} />
         <Route path="/morphing" element={<Page.Morphing />} />
         <Route path="/earth" element={<Page.Earth />} />
+        <Route path="/gaussian-splatting" element={<Page.GaussianSplatting />} />
         <Route path="/fnr-award-2025" element={<Page.FnrAward />} />
       </Routes>
     </div>

@@ -6,6 +6,7 @@ import MicInputPage from './MicInputPage'
 import MorphingPage from './MorphingPage'
 import EarthPage from './EarthPage'
 import FnrAwardPage from './FnrAwardPage'
+import GaussianSplattingPage from './GaussianSplattingPage'
 
 interface PageWrapperProps {
   children: React.ReactNode
@@ -42,6 +43,11 @@ const Page = {
   Earth: () => (
     <PageWrapper>
       <EarthPage />
+    </PageWrapper>
+  ),
+  GaussianSplatting: () => (
+    <PageWrapper>
+      <GaussianSplattingPage />
     </PageWrapper>
   ),
   FnrAward: () => (

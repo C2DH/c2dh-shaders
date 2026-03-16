@@ -1,7 +1,7 @@
 import { SplatMesh, SparkRenderer } from '@sparkjsdev/spark'
 import { useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Stats } from '@react-three/drei'
 
 function GaussianSplattingScene() {
   const { scene, gl } = useThree()
@@ -39,6 +39,7 @@ export function GaussianSplatting() {
       <color attach="background" args={['black']} />
       <GaussianSplattingScene />
       <OrbitControls />
+      <Stats className="ml-[calc(50%-40px)]" />
     </Canvas>
   )
 }

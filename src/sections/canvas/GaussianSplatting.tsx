@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls, Stats } from '@react-three/drei'
 
+const IS_DEV = import.meta.env.DEV
+
 function GaussianSplattingScene() {
   const { scene, gl } = useThree()
 
@@ -35,11 +37,15 @@ function GaussianSplattingScene() {
 
 export function GaussianSplatting() {
   return (
-    <Canvas camera={{ position: [0, 0, 2], fov: 45 }}>
+    <Canvas
+      camera={{ position: [0, 0, 2], fov: 45 }}
+      dpr={[1, 1.5]}
+      gl={{ powerPreference: 'high-performance', antialias: false, alpha: false, stencil: false }}
+    >
       <color attach="background" args={['black']} />
       <GaussianSplattingScene />
       <OrbitControls />
-      <Stats className="ml-[calc(50%-40px)]" />
+      {IS_DEV && <Stats className="ml-[calc(50%-40px)]" />}
     </Canvas>
   )
 }

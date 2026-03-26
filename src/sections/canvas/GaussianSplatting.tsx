@@ -5,6 +5,9 @@ import { OrbitControls, Stats } from '@react-three/drei'
 
 const IS_DEV = import.meta.env.DEV
 
+// Detect Firefox for performance optimizations
+const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.includes('Firefox')
+
 function GaussianSplattingScene() {
   const { scene, gl } = useThree()
 
@@ -13,7 +16,7 @@ function GaussianSplattingScene() {
     // and proper lifecycle management (auto-created one is never cleaned up).
     const sparkRenderer = new SparkRenderer({
       renderer: gl,
-      view: { sort32: true }, // 32-bit GPU radix sort for higher precision
+      view: { sort32: !isFirefox }, // Disable 32-bit sort on Firefox for better performance
     })
     scene.add(sparkRenderer)
 
@@ -39,8 +42,15 @@ export function GaussianSplatting() {
   return (
     <Canvas
       camera={{ position: [0, 0, 2], fov: 20 }}
-      dpr={[1, 1.5]}
-      gl={{ powerPreference: 'high-performance', antialias: false, alpha: false, stencil: false }}
+      dpr={isFirefox ? [1, 1] : [1, 1.5]}
+      gl={{
+        powerPreference: 'high-performance',
+        antialias: false,
+        alpha: false,
+        stencil: false,
+        // Firefox-specific optimizations
+        ...(isFirefox && { logarithmicDepthBuffer: false }),
+      }}
     >
       <color attach="background" args={['black']} />
       <GaussianSplattingScene />

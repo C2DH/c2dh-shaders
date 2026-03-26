@@ -17,7 +17,7 @@ function GaussianSplattingScene() {
     })
     scene.add(sparkRenderer)
 
-    const splat = new SplatMesh({ url: '/gs/test.sog' })
+    const splat = new SplatMesh({ url: '/gs/front.sog' })
     splat.rotation.x = Math.PI
     scene.add(splat)
 
@@ -38,7 +38,7 @@ function GaussianSplattingScene() {
 export function GaussianSplatting() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 2], fov: 45 }}
+      camera={{ position: [0, 0, 2], fov: 20 }}
       dpr={[1, 1.5]}
       gl={{ powerPreference: 'high-performance', antialias: false, alpha: false, stencil: false }}
     >

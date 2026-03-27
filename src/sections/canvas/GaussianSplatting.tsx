@@ -20,7 +20,7 @@ function GaussianSplattingScene() {
     })
     scene.add(sparkRenderer)
 
-    const splat = new SplatMesh({ url: '/gs/front.sog' })
+    const splat = new SplatMesh({ url: '/gs/fom.sog' })
     splat.rotation.x = Math.PI
     scene.add(splat)
 

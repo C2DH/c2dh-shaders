@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { InstancedMesh } from 'three'
 import GlassCylinderMaterial from './GlassCylinderMaterial'
 
@@ -13,11 +13,11 @@ export default function CylinderArray({ count, spacing }: Props) {
 
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  useMemo(() => {
+  useEffect(() => {
     if (!meshRef.current) return
 
     for (let i = 0; i < count; i++) {
-      const x = (i - count / 2) * spacing
+      const x = (i - (count - 1) / 2) * spacing
 
       dummy.position.set(x, 0, 0)
       dummy.updateMatrix()
@@ -31,8 +31,6 @@ export default function CylinderArray({ count, spacing }: Props) {
   return (
     <instancedMesh ref={meshRef} args={[undefined, undefined, count]} castShadow receiveShadow>
       <cylinderGeometry args={[0.4, 0.4, 20, 64]} />
-
-      {/* IMPORTANT: must be instance-compatible material */}
       <GlassCylinderMaterial />
     </instancedMesh>
   )

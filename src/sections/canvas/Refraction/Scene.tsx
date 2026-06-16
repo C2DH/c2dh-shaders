@@ -1,15 +1,11 @@
 import CylinderArray from './CylinderArray'
 import ColorSphere from './ColorSphere'
 import Lights from './Lights'
-// import Environment from './Environment'
-
-// import { MeshTransmissionMaterial } from '@react-three/drei'
 
 export default function Scene() {
   return (
     <>
       <Lights />
-      {/* <Environment /> */}
 
       <ColorSphere position={[0, 0, -2.5]} scale={[3, 3, 3]} />
       <ColorSphere position={[-3.5, 0, -2.5]} scale={[2, 2, 2]} color="#3366ff" />

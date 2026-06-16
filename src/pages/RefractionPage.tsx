@@ -14,6 +14,7 @@ const RefractionCanvasPage = () => {
       />
       <div className="canvas">
         <span className="bg-text">Refraction</span>
+        <h1 className="absolute top-0 left-0 color-white z-1">Refraction is here</h1>
         <CanvasViz />
       </div>
     </div>

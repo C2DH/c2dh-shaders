@@ -6,7 +6,7 @@ export default function GlassCylinderMaterial() {
       thickness={2.0}
       transmission={1}
       roughness={0.2}
-      ior={1.5}
+      ior={2.5}
       chromaticAberration={0.02}
       distortion={1}
       distortionScale={100}

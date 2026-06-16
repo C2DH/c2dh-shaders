@@ -7,6 +7,7 @@ import MorphingPage from './MorphingPage'
 import EarthPage from './EarthPage'
 import FnrAwardPage from './FnrAwardPage'
 import GaussianSplattingPage from './GaussianSplattingPage'
+import RefractionPage from './RefractionPage'
 
 interface PageWrapperProps {
   children: React.ReactNode
@@ -53,6 +54,11 @@ const Page = {
   FnrAward: () => (
     <PageWrapper>
       <FnrAwardPage />
+    </PageWrapper>
+  ),
+  Refraction: () => (
+    <PageWrapper>
+      <RefractionPage />
     </PageWrapper>
   ),
 }

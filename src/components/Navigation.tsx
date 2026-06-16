@@ -37,6 +37,9 @@ const Navigation = ({ showDocumentation, setShowDocumentation }: NavigationProps
         <li>
           <Link to="/fnr-award-2025">FNR Award 2025</Link>
         </li>
+        <li>
+          <Link to="/refraction">Refraction</Link>
+        </li>
       </ul>
     </nav>
   )

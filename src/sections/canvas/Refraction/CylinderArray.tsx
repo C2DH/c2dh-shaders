@@ -15,9 +15,9 @@ export default function ShapeArray({ count, spacing }: Props) {
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
   const geometry = useRoundedBoxGeometry({
-    size: 0.8,
-    radius: 0.25,
-    smoothness: 5,
+    size: 0.4,
+    radius: 0.05,
+    smoothness: 3,
     height: 20,
   })
 

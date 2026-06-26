@@ -7,11 +7,13 @@ export default function Scene() {
     <>
       <Lights />
 
-      <ColorSphere position={[0, 0, -2.5]} scale={[3, 3, 3]} />
-      <ColorSphere position={[-3.5, 0, -2.5]} scale={[2, 2, 2]} color="#3366ff" />
-      <ColorSphere position={[3, 1, -2.5]} scale={[1.5, 1.5, 1.5]} color="orange" />
+      <ColorSphere position={[0, 0, -50]} scale={[30, 30, 30]} color="#0B29FF" />
+      <ColorSphere position={[-3.5, 0, -50]} scale={[30, 30, 30]} color="#82979D" />
+      <ColorSphere position={[3, 1, -50]} scale={[30, 30, 30]} color="#254051" />
+      <ColorSphere position={[5, 1, -50]} scale={[30, 30, 30]} color="#FFB9C0" />
+      <ColorSphere position={[5, 3, -50]} scale={[30, 30, 30]} color="#FFFFFF" />
 
-      <CylinderArray count={20} spacing={0.75} />
+      <CylinderArray count={80} spacing={0.35} />
     </>
   )
 }

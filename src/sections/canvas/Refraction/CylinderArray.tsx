@@ -15,10 +15,10 @@ export default function ShapeArray({ count, spacing }: Props) {
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
   const geometry = useRoundedBoxGeometry({
-    size: 0.4,
-    radius: 0.05,
+    size: 0.38,
+    radius: 0.03,
     smoothness: 3,
-    height: 20,
+    height: 15,
   })
 
   useEffect(() => {

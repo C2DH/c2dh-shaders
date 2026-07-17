@@ -35,6 +35,9 @@ const Navigation = ({ showDocumentation, setShowDocumentation }: NavigationProps
           <Link to="/gaussian-splatting">Gaussian Splatting</Link>
         </li>
         <li>
+          <Link to="/radio-of-luxembourg">Radio Of Luxembourg</Link>
+        </li>
+        <li>
           <Link to="/fnr-award-2025">FNR Award 2025</Link>
         </li>
         <li>

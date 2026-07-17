@@ -7,6 +7,7 @@ import MorphingPage from './MorphingPage'
 import EarthPage from './EarthPage'
 import FnrAwardPage from './FnrAwardPage'
 import GaussianSplattingPage from './GaussianSplattingPage'
+import RadioOfLuxembourgPage from './RadioOfLuxembourgPage'
 import RefractionPage from './RefractionPage'
 
 interface PageWrapperProps {
@@ -49,6 +50,11 @@ const Page = {
   GaussianSplatting: () => (
     <PageWrapper>
       <GaussianSplattingPage />
+    </PageWrapper>
+  ),
+  RadioOfLuxembourg: () => (
+    <PageWrapper>
+      <RadioOfLuxembourgPage />
     </PageWrapper>
   ),
   FnrAward: () => (

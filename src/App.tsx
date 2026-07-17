@@ -95,6 +95,7 @@ function App() {
         <Route path="/morphing" element={<Page.Morphing />} />
         <Route path="/earth" element={<Page.Earth />} />
         <Route path="/gaussian-splatting" element={<Page.GaussianSplatting />} />
+        <Route path="/radio-of-luxembourg" element={<Page.RadioOfLuxembourg />} />
         <Route path="/fnr-award-2025" element={<Page.FnrAward />} />
         <Route path="/refraction" element={<Page.Refraction />} />
       </Routes>

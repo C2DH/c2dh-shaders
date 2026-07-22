@@ -1,37 +1,30 @@
-import * as THREE from "three";
-import { Canvas, extend, useFrame, ReactThreeFiber } from "@react-three/fiber";
-import {
-  OrbitControls,
-  shaderMaterial,
-  PerspectiveCamera,
-} from "@react-three/drei";
-import { useRef, FC, useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import * as THREE from 'three'
+import { Canvas, extend, useFrame, ReactThreeFiber } from '@react-three/fiber'
+import { OrbitControls, shaderMaterial, PerspectiveCamera } from '@react-three/drei'
+import { useRef, FC, useState } from 'react'
+import { useGLTF } from '@react-three/drei'
 // import { useControls } from "leva";
-import fragmentShaderSound from "../../shaders/mic_Input/fragment.glsl?raw";
-import vertexShaderSound from "../../shaders/mic_Input/vertex.glsl?raw";
-import MicInput from "../../components/MicInput";
-import useGlobalState from "../../components/store";
+import fragmentShaderSound from '../../shaders/mic_Input/fragment.glsl?raw'
+import vertexShaderSound from '../../shaders/mic_Input/vertex.glsl?raw'
+import MicInput from '../../components/MicInput'
+import useGlobalState from '../../components/store'
 
 // Extend ShaderMaterial to include custom properties
-declare module "three" {
+declare module 'three' {
   interface ShaderMaterial {
-    uTime: number;
-    uColor: THREE.Color;
+    uTime: number
+    uColor: THREE.Color
   }
 }
 
 interface GlobalState {
-  isListening: boolean;
+  isListening: boolean
 }
 
 // Extend JSX IntrinsicElements to include soundMaterial
-declare module "@react-three/fiber" {
+declare module '@react-three/fiber' {
   interface ThreeElements {
-    soundMaterial: ReactThreeFiber.Object3DNode<
-      THREE.ShaderMaterial,
-      typeof THREE.ShaderMaterial
-    >;
+    soundMaterial: ReactThreeFiber.Object3DNode<THREE.ShaderMaterial, typeof THREE.ShaderMaterial>
   }
 }
 
@@ -39,7 +32,7 @@ declare module "@react-three/fiber" {
 const SoundMaterial = shaderMaterial(
   {
     uTime: 0,
-    uColor: new THREE.Color("#70c1ff"),
+    uColor: new THREE.Color('#70c1ff'),
     uAudioData: 0, // Default value
     transparent: true,
     side: THREE.DoubleSide,
@@ -47,22 +40,22 @@ const SoundMaterial = shaderMaterial(
     blending: THREE.AdditiveBlending,
   },
   vertexShaderSound,
-  fragmentShaderSound
-);
+  fragmentShaderSound,
+)
 
-extend({ SoundMaterial });
+extend({ SoundMaterial })
 
 // CubeAnnualReport Component
 const CubeAnnualReport: FC<{
-  audioValue: number;
+  audioValue: number
 }> = ({ audioValue, ...props }) => {
-  const { nodes, materials } = useGLTF("./glb/cubeAnnualReport.glb");
-  const cubeMaterial = useRef<THREE.ShaderMaterial>(null);
-  const { isListening } = useGlobalState() as GlobalState;
+  const { nodes, materials } = useGLTF('./glb/cubeAnnualReport.glb')
+  const cubeMaterial = useRef<THREE.ShaderMaterial>(null)
+  const { isListening } = useGlobalState() as GlobalState
 
-  (materials.White as THREE.MeshStandardMaterial).roughness = 1;
-  materials.White.transparent = true;
-  materials.White.opacity = 0.8;
+  ;(materials.White as THREE.MeshStandardMaterial).roughness = 1
+  materials.White.transparent = true
+  materials.White.opacity = 0.8
 
   // const { uColor } = useControls({
   //   uColor: "#70c1ff", // Default color
@@ -70,19 +63,17 @@ const CubeAnnualReport: FC<{
 
   useFrame(() => {
     if (cubeMaterial.current) {
-      cubeMaterial.current.uniforms.uAudioData.value = isListening
-        ? audioValue
-        : 0;
+      cubeMaterial.current.uniforms.uAudioData.value = isListening ? audioValue : 0
       // console.log("audioValue", cubeMaterial.current.uniforms.uAudioData.value);
     }
-  });
+  })
 
   useFrame((_, delta) => {
     if (cubeMaterial.current) {
-      cubeMaterial.current.uTime += delta;
+      cubeMaterial.current.uTime += delta
       // cubeMaterial.current.uColor = new THREE.Color(uColor);
     }
-  });
+  })
 
   return (
     <group scale={0.5} {...props} dispose={null}>
@@ -96,14 +87,14 @@ const CubeAnnualReport: FC<{
         material={materials.White}
       />
     </group>
-  );
-};
+  )
+}
 
-useGLTF.preload("./glb/cubeAnnualReport.glb");
+useGLTF.preload('./glb/cubeAnnualReport.glb')
 
 // Main Canvas Component
 const CanvasViz: FC = () => {
-  const [audioValue, setAudioValue] = useState<number>(0); // Store a single number
+  const [audioValue, setAudioValue] = useState<number>(0) // Store a single number
 
   return (
     <>
@@ -111,12 +102,12 @@ const CanvasViz: FC = () => {
       <MicInput onAudioData={setAudioValue} />
       <Canvas
         shadows
+        dpr={Math.min(window.devicePixelRatio, 2)}
         gl={{
-          pixelRatio: Math.min(window.devicePixelRatio, 2),
           antialias: true,
         }}
       >
-        <color attach="background" args={["black"]} />
+        <color attach="background" args={['black']} />
         <directionalLight position={[-3, 0, 0]} intensity={9} />
         <directionalLight position={[3, 0, 0]} intensity={9} />
         <directionalLight position={[0, 0, -3]} intensity={9} />
@@ -135,7 +126,7 @@ const CanvasViz: FC = () => {
         {/* <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/dancing_hall_1k.hdr" /> */}
       </Canvas>
     </>
-  );
-};
+  )
+}
 
-export default CanvasViz;
+export default CanvasViz

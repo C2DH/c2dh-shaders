@@ -1,6 +1,6 @@
 import CodeSection from '../sections/CodeSection.tsx'
-import CanvasVizRaw from '../sections/canvas/RadioOfLuxembourg.tsx?raw'
-import { RadioOfLuxembourg as CanvasViz } from '../sections/canvas/RadioOfLuxembourg.tsx'
+import CanvasVizRaw from '../sections/canvas/RadioOfLuxembourg/RadioOfLuxembourg.tsx?raw'
+import { RadioOfLuxembourg as CanvasViz } from '../sections/canvas/RadioOfLuxembourg/RadioOfLuxembourg.tsx'
 
 const RadioOfLuxembourgPage = () => {
   return (

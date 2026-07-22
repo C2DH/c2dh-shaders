@@ -12,11 +12,11 @@ function GaussianSplattingScene() {
   const { scene, gl } = useThree()
 
   useEffect(() => {
-    // Explicitly create SparkRenderer for GPU-accelerated splat sorting/rendering
-    // and proper lifecycle management (auto-created one is never cleaned up).
+    // Explicitly create SparkRenderer and attach it to scene root.
     const sparkRenderer = new SparkRenderer({
       renderer: gl,
-      view: { sort32: !isFirefox }, // Disable 32-bit sort on Firefox for better performance
+      // In Spark 2.x sort32 is always used; throttle sort cadence on Firefox.
+      minSortIntervalMs: isFirefox ? 24 : 0,
     })
     scene.add(sparkRenderer)
 
@@ -32,6 +32,7 @@ function GaussianSplattingScene() {
       scene.remove(splat)
       scene.remove(sparkRenderer)
       splat.dispose()
+      sparkRenderer.dispose()
     }
   }, [scene, gl])
 

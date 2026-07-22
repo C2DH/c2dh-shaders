@@ -1,33 +1,26 @@
-import * as THREE from "three";
-import { Canvas, extend, useFrame, ReactThreeFiber } from "@react-three/fiber";
-import {
-  OrbitControls,
-  shaderMaterial,
-  PerspectiveCamera,
-} from "@react-three/drei";
-import { useRef, FC } from "react";
+import * as THREE from 'three'
+import { Canvas, extend, useFrame, ReactThreeFiber } from '@react-three/fiber'
+import { OrbitControls, shaderMaterial, PerspectiveCamera } from '@react-three/drei'
+import { useRef, FC } from 'react'
 
-import { useGLTF } from "@react-three/drei";
-import { useControls } from "leva";
-import fragmentShaderLogo from "../../shaders/logo_c2dh/fragment.glsl?raw";
-import vertexShaderLogo from "../../shaders/logo_c2dh/vertex.glsl?raw";
-import random2D from "../../shaders/logo_c2dh/includes/random2D.glsl?raw"; // Import random2D shader
+import { useGLTF } from '@react-three/drei'
+import { useControls } from 'leva'
+import fragmentShaderLogo from '../../shaders/logo_c2dh/fragment.glsl?raw'
+import vertexShaderLogo from '../../shaders/logo_c2dh/vertex.glsl?raw'
+import random2D from '../../shaders/logo_c2dh/includes/random2D.glsl?raw' // Import random2D shader
 
 // Extend ShaderMaterial to include custom properties
-declare module "three" {
+declare module 'three' {
   interface ShaderMaterial {
-    uTime: number;
-    uColor: THREE.Color;
+    uTime: number
+    uColor: THREE.Color
   }
 }
 
 // Extend JSX IntrinsicElements to include logoMaterial
-declare module "@react-three/fiber" {
+declare module '@react-three/fiber' {
   interface ThreeElements {
-    logoMaterial: ReactThreeFiber.Object3DNode<
-      THREE.ShaderMaterial,
-      typeof THREE.ShaderMaterial
-    >;
+    logoMaterial: ReactThreeFiber.Object3DNode<THREE.ShaderMaterial, typeof THREE.ShaderMaterial>
   }
 }
 
@@ -35,7 +28,7 @@ declare module "@react-three/fiber" {
 const LogoMaterial = shaderMaterial(
   {
     uTime: 0,
-    uColor: new THREE.Color("#70c1ff"),
+    uColor: new THREE.Color('#70c1ff'),
     transparent: true,
     side: THREE.DoubleSide,
     depthWrite: false,
@@ -45,68 +38,62 @@ const LogoMaterial = shaderMaterial(
     ${random2D}
     ${vertexShaderLogo}
   `,
-  fragmentShaderLogo
-);
+  fragmentShaderLogo,
+)
 
-extend({ LogoMaterial });
+extend({ LogoMaterial })
 
 // LogoC2dh Component
 const LogoC2dh: FC<{ position: [number, number, number] }> = (props) => {
-  const logoMaterial = useRef<THREE.ShaderMaterial>(null);
-  const { nodes } = useGLTF("./glb/c2dh_logo.glb");
+  const logoMaterial = useRef<THREE.ShaderMaterial>(null)
+  const { nodes } = useGLTF('./glb/c2dh_logo.glb')
 
   const { uColor } = useControls({
-    uColor: "#70c1ff", // Default color
-  });
+    uColor: '#70c1ff', // Default color
+  })
 
   useFrame((_, delta) => {
     if (logoMaterial.current) {
-      logoMaterial.current.uTime += delta;
-      logoMaterial.current.uColor = new THREE.Color(uColor);
+      logoMaterial.current.uTime += delta
+      logoMaterial.current.uColor = new THREE.Color(uColor)
     }
-  });
+  })
 
   return (
     <group scale={2.5} {...props} dispose={null}>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={(nodes.logoC2dh as THREE.Mesh).geometry}
-      >
+      <mesh castShadow receiveShadow geometry={(nodes.logoC2dh as THREE.Mesh).geometry}>
         <logoMaterial ref={logoMaterial} />
       </mesh>
     </group>
-  );
-};
+  )
+}
 
-useGLTF.preload("./glb/c2dh_logo.glb");
+useGLTF.preload('./glb/c2dh_logo.glb')
 
 // CubeAnnualReport Component
-const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
-  props
-) => {
-  const { nodes, materials } = useGLTF("./glb/cubeAnnualReport.glb");
-  const textMaterial = useRef<THREE.ShaderMaterial>(null);
-  const cubeMaterial = useRef<THREE.ShaderMaterial>(null);
+const CubeAnnualReport: FC<{ position: [number, number, number] }> = (props) => {
+  const { nodes, materials } = useGLTF('./glb/cubeAnnualReport.glb')
+  const textMaterial = useRef<THREE.ShaderMaterial>(null)
+  const cubeMaterial = useRef<THREE.ShaderMaterial>(null)
 
-  (materials.White as THREE.MeshStandardMaterial).roughness = 1;
-  materials.White.transparent = true;
-  materials.White.opacity = 0.8;
+  ;(materials.White as THREE.MeshStandardMaterial).roughness = 1
+  materials.White.transparent = true
+  materials.White.opacity = 0.8
 
   const { uColor } = useControls({
-    uColor: "#70c1ff", // Default color
-  });
+    uColor: '#70c1ff', // Default color
+  })
 
   useFrame((_, delta) => {
     if (textMaterial.current) {
-      textMaterial.current.uTime += delta;
-      textMaterial.current.uColor = new THREE.Color(uColor);
+      textMaterial.current.uTime += delta
+      textMaterial.current.uColor = new THREE.Color(uColor)
     }
     if (cubeMaterial.current) {
-      cubeMaterial.current.uTime += delta;
-      cubeMaterial.current.uColor = new THREE.Color(uColor);
+      cubeMaterial.current.uTime += delta
+      cubeMaterial.current.uColor = new THREE.Color(uColor)
     }
-  });
+  })
 
   return (
     <group scale={0.5} {...props} dispose={null}>
@@ -123,41 +110,36 @@ const CubeAnnualReport: FC<{ position: [number, number, number] }> = (
         material={materials.White}
       />
     </group>
-  );
-};
+  )
+}
 
-useGLTF.preload("./glb/cubeAnnualReport.glb");
+useGLTF.preload('./glb/cubeAnnualReport.glb')
 
 // Main Canvas Component
 const CanvasViz: FC = () => {
   // Use leva to create a dropdown for selecting the 3D object
   const { selectedObject } = useControls({
     selectedObject: {
-      value: "LogoC2dh",
-      options: ["LogoC2dh", "CubeAnnualReport"],
-      label: "3D Object", // Label for the dropdown
+      value: 'LogoC2dh',
+      options: ['LogoC2dh', 'CubeAnnualReport'],
+      label: '3D Object', // Label for the dropdown
     },
     uColor: {
-      value: "#70c1ff", // Default color
-      label: "Color",
+      value: '#70c1ff', // Default color
+      label: 'Color',
     },
-  });
+  })
 
   return (
-    <Canvas
-      shadows
-      gl={{ pixelRatio: Math.min(window.devicePixelRatio, 2), antialias: true }}
-    >
-      <color attach="background" args={["black"]} />
+    <Canvas shadows dpr={Math.min(window.devicePixelRatio, 2)} gl={{ antialias: true }}>
+      <color attach="background" args={['black']} />
       <directionalLight position={[-3, 0, 0]} intensity={9} />
       <directionalLight position={[3, 0, 0]} intensity={9} />
       <directionalLight position={[0, 0, -3]} intensity={9} />
       <directionalLight position={[0, 0, 3]} intensity={9} />
 
-      {selectedObject === "LogoC2dh" && <LogoC2dh position={[0, 0, 0]} />}
-      {selectedObject === "CubeAnnualReport" && (
-        <CubeAnnualReport position={[0, 0, 0]} />
-      )}
+      {selectedObject === 'LogoC2dh' && <LogoC2dh position={[0, 0, 0]} />}
+      {selectedObject === 'CubeAnnualReport' && <CubeAnnualReport position={[0, 0, 0]} />}
       <OrbitControls
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}
@@ -168,7 +150,7 @@ const CanvasViz: FC = () => {
       <PerspectiveCamera makeDefault position={[0, 0, 3]} />
       {/* <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/dancing_hall_1k.hdr" /> */}
     </Canvas>
-  );
-};
+  )
+}
 
-export default CanvasViz;
+export default CanvasViz

@@ -1,10 +1,15 @@
 import { SplatMesh, SparkRenderer } from '@sparkjsdev/spark'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { CubeCamera, MeshRefractionMaterial, OrbitControls, Stats } from '@react-three/drei'
-import { useEffect, useMemo, useRef } from 'react'
-import { FrontSide, Group } from 'three'
+
+import { CubeCamera, OrbitControls, Stats } from '@react-three/drei'
+
+import { useEffect, useRef } from 'react'
+import { Group, DoubleSide } from 'three'
+
+import './Shaders/GlassSphereMaterial'
 
 const IS_DEV = import.meta.env.DEV
+
 const isFirefox = typeof navigator !== 'undefined' && navigator.userAgent.includes('Firefox')
 
 function ClassicMeshOverlay() {
@@ -20,32 +25,33 @@ function ClassicMeshOverlay() {
   })
 
   return (
-    <CubeCamera resolution={512} frames={Infinity}>
+    <CubeCamera resolution={64} frames={1}>
       {(envMap) => (
         <group ref={groupRef} position={[0, -0.2, 0]}>
           <mesh scale={0.65}>
             <boxGeometry args={[0.24, 0.24, 0.24]} />
-            <meshPhysicalMaterial
-              color="#f8d56a"
-              roughness={0.25}
-              metalness={0.05}
-              clearcoat={0.35}
-              clearcoatRoughness={0.2}
-            />
+
+            <meshStandardMaterial color="#fff000" roughness={0.5} metalness={0} />
           </mesh>
-          <mesh renderOrder={2}>
-            <sphereGeometry args={[0.32, 32, 32]} />
-            <MeshRefractionMaterial
+
+          <mesh renderOrder={1}>
+            <sphereGeometry args={[0.32, 24, 24]} />
+
+            {/* @ts-expect-error Custom R3F material is registered via side-effect import */}
+            <glassSphereMaterial
               envMap={envMap}
-              color="#dff5ff"
-              ior={1.18}
-              bounces={2}
-              fresnel={1.5}
-              aberrationStrength={0.01}
-              side={FrontSide}
-              transparent
-              opacity={0.3}
+              useEnvMap={true}
+              fresnelPower={1} // broad glow, unchanged
+              rimWidth={0.8} // unchanged
+              reflectionFresnelPower={8.0} // NEW — keeps reflections pinned to the true edge
+              reflectionStrength={1}
+              rimColor="#ffffff"
+              opacity={0.85}
+              transparent={true}
+              depthTest={true}
               depthWrite={false}
+              renderOrder={1}
+              alphaTest={0.0}
             />
           </mesh>
         </group>
@@ -54,34 +60,45 @@ function ClassicMeshOverlay() {
   )
 }
 
+function RadioDepthProxy() {
+  return (
+    <mesh position={[4, 0, 0]} rotation={[0, Math.PI / 2, 0]} renderOrder={0}>
+      <planeGeometry args={[4, 4]} />
+
+      <meshBasicMaterial
+        transparent={true}
+        opacity={0}
+        depthWrite={true}
+        depthTest
+        colorWrite={false}
+        // side={DoubleSide}
+      />
+    </mesh>
+  )
+}
+
 function RadioOfLuxembourgScene() {
   const { scene, gl } = useThree()
 
-  const sparkRenderer = useMemo(() => {
-    return new SparkRenderer({
+  useEffect(() => {
+    const sparkRenderer = new SparkRenderer({
       renderer: gl,
-      view: {
-        sort32: !isFirefox,
-      },
-    })
-  }, [gl])
 
-  const splat = useMemo(() => {
-    const mesh = new SplatMesh({
+      // Spark 2.x: depth behavior is configured directly on the renderer.
+      transparent: true,
+      depthTest: true,
+    })
+
+    const splat = new SplatMesh({
       url: '/gs/radio_of_luxembourg.sog',
     })
 
-    mesh.rotation.x = Math.PI
-    mesh.position.set(6, -2, 3)
+    splat.rotation.x = Math.PI
+    splat.position.set(6, -2, 3)
 
-    // Static transform
-    mesh.updateMatrix()
-    mesh.matrixAutoUpdate = false
+    splat.updateMatrix()
+    splat.matrixAutoUpdate = false
 
-    return mesh
-  }, [])
-
-  useEffect(() => {
     scene.add(sparkRenderer)
     scene.add(splat)
 
@@ -92,13 +109,17 @@ function RadioOfLuxembourgScene() {
       scene.remove(sparkRenderer)
 
       splat.dispose()
+      sparkRenderer.dispose()
     }
-  }, [scene, sparkRenderer, splat])
+  }, [scene, gl])
 
   return (
     <>
       <ambientLight intensity={0.45} />
+
       <directionalLight position={[1.5, 2, 2]} intensity={1.1} color="#fff6df" />
+
+      <RadioDepthProxy />
 
       <ClassicMeshOverlay />
     </>
@@ -112,13 +133,18 @@ export function RadioOfLuxembourg() {
         position: [0, 0, 2.2],
         fov: 22,
       }}
-      dpr={Math.min(window.devicePixelRatio, 1.25)}
+      dpr={Math.min(window.devicePixelRatio, isFirefox ? 1.25 : 1.5)}
       gl={{
         powerPreference: 'high-performance',
-        antialias: false,
+
+        antialias: true,
+
         alpha: false,
+
         stencil: false,
+
         preserveDrawingBuffer: false,
+
         logarithmicDepthBuffer: false,
       }}
     >
